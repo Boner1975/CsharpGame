@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BattleshipOOP
 {
-    class Display: Battleship
+    class Display: Board
     {
     }
 }
