@@ -6,5 +6,14 @@ namespace BattleshipOOP
 {
     class Board
     {
+        Square[,] ocean;
+
+        public bool IsPlacementOk
+        {
+            get
+            {
+                return true; //to be implemented
+            }
+        }
     }
 }

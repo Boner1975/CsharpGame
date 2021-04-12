@@ -6,5 +6,6 @@ namespace BattleshipOOP
 {
     class Ship
     {
+        List<Square> list;
     }
 }
