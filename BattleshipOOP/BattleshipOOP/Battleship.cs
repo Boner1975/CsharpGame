@@ -6,5 +6,8 @@ namespace BattleshipOOP
 {
     class Battleship
     {
+        Display display;
+        Input input;
+
     }
 }
