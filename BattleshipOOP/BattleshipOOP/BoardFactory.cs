@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BattleshipOOP
 {
-    class BoardFactory
+    public class BoardFactory
     {
         public void RandomPlacement()
         {

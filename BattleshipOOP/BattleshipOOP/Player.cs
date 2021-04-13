@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BattleshipOOP
 {
-    class Player
+    public class Player
     {
         List<Ship> list;
 

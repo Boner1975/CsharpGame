@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BattleshipOOP
 {
-    class Board
+    public class Board
     {
         Square[,] ocean;
 
