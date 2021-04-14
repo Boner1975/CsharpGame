@@ -6,14 +6,35 @@ namespace BattleshipOOP
 {
     public class Player
     {
-        List<Ship> list;
+        private List<Ship> list;
+        private bool IsAlive;
+        private bool IsHuman;
 
-        public bool IsAlive
+        public Player(bool isHuman = true)
         {
-            get
-            {
-                return true; //to be implemented
-            }
+            this.IsAlive = true;
+            this.IsHuman = isHuman;
+        }
+
+        public bool GetIsAlive()
+        {
+            CheckPlayerStatus();
+            return this.IsAlive;
+        }
+
+        private void CheckPlayerStatus()
+        {
+            this.IsAlive = list.Count > 0;
+        }
+        
+        public bool GetIsHuman()
+        {
+            return this.IsHuman;
+        }
+
+        public void SetListOfShips(List<Ship> list)
+        {
+            this.list = list;
         }
     }
 }

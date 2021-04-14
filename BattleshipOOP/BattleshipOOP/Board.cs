@@ -44,17 +44,36 @@ namespace BattleshipOOP
                 return false;
             }
 
-/*            if()
+            if (CheckSquare(x1, y1)==false)
             {
                 return false;
-            }*/
+            }
 
             return true;
         }
 
         private bool CheckSquare(int x,int y)
         {
-            throw new NotImplementedException();
+            for (int i = x-1;i <= x + 1; i++) 
+            {
+                if (i<0 || i >= size) 
+                {
+                    continue;
+                }
+                for (int j = y - 1; j <= y + 1; j++)
+                { 
+                    if(j<0 || j>=size)
+                    {
+                        continue;
+                    }
+                    if (ocean[i, j].SquareStatus == SquareStatus.Ship)
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+
         }
     }
 }
