@@ -62,7 +62,7 @@ namespace BattleshipOOP
             }
         }
 
-        public void ShipHit()
+        public void ShipHitOrMissed()
         {
             if (SquareStatus == SquareStatus.Ship)
             {

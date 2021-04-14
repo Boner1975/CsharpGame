@@ -9,6 +9,7 @@ namespace BattleshipOOP
         private int BoardSize;
         public Board Board1;
         public Board Board2;
+        //public Board EmptyBoard = new Board();
         private Player Player1;
         private Player Player2;
         private Player CurrentPlayer;

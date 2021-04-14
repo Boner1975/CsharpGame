@@ -4,8 +4,8 @@ namespace BattleshipOOP
 {
     public class Board
     {
-        private Square[,] ocean;
-        private int size;
+        public Square[,] ocean;
+        public int size;
 
         public Board(int size)
         {
@@ -13,7 +13,7 @@ namespace BattleshipOOP
             ocean = new Square[size, size];
             for (int i = 0; i < size; i++)
                 for (int j = 0; j < size; j++)
-                    ocean[i, j] = new Square();
+                    ocean[i, j] = new Square(i, j);
         }
 
         public bool IsPlacementOk
