@@ -11,7 +11,8 @@ namespace BattleshipOOP
         Empty = '~',
         Ship = 'S',
         Hit = 'H',
-        Missed = 'M'
+        Missed = 'M',
+        Sunk = 'X'
 
         /*
         [Description("~")]

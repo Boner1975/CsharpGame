@@ -36,5 +36,55 @@ namespace BattleshipOOP
         {
             this.list = list;
         }
+
+        public void CheckShot1(Square square)
+        {
+            bool squareInList = false;
+            int shipIndex = 0;
+
+            do
+            {
+                squareInList = SuccessfullHit1(list[shipIndex], square);
+                shipIndex++;
+            } while (!squareInList && shipIndex < list.Count);
+        }
+        
+        private bool SuccessfullHit1(Ship ship, Square square)
+        {
+            if (ship.GetLocation().Contains(square))
+            {
+                square.SquareStatus = SquareStatus.Hit;
+                DidItSunk(ship);
+                return true;
+            }
+
+            return false;
+        }
+        
+        private void DidItSunk(Ship ship)
+        {
+            if (AllSquaresHit(ship))
+                SunkTheShip(ship);
+
+        }
+
+        private bool AllSquaresHit(Ship ship)
+        {
+            foreach (Square square in ship.GetLocation())
+            {
+                if (square.SquareStatus != SquareStatus.Hit)
+                    return false;
+            }
+
+            return true;
+        }
+
+        private void SunkTheShip(Ship ship)
+        {
+            foreach (Square square in ship.GetLocation())
+            {
+                square.SquareStatus = SquareStatus.Sunk;
+            }
+        }
     }
 }
