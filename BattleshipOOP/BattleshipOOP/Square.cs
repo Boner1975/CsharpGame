@@ -1,14 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.ComponentModel;
 
 
 namespace BattleshipOOP
 {
-    class Square
+    public enum SquareStatus
     {
-        int x;
-        int y;
+        Empty = '~',
+        Ship = 'S',
+        Hit = 'H',
+        Missed = 'M'
+
+        /*
+        [Description("~")]
+        Empty = 1,
+
+        [Description("S")]
+        Ship,
+
+        [Description("H")]
+        Hit,
+
+        [Description("M")]
+        Missed
+        */
+    }
+
+    public class Square
+    {
+        public int x;
+        public int y;
+        public SquareStatus SquareStatus;
 
         public (int, int) Position
         {
@@ -16,11 +40,19 @@ namespace BattleshipOOP
             {
                 return (x, y);
             }
+        }
 
-            set
-            {
-                
-            }
+        public Square(int x, int y)
+        {
+            this.x = x;
+            this.y = y;
+            SquareStatus = SquareStatus.Empty;
+        }
+
+        public char GetCharacter()
+        {
+            return (char)SquareStatus; 
         }
     }
+
 }
