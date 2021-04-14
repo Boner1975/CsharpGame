@@ -6,7 +6,7 @@ namespace BattleshipOOP
 {
     public class Game
     {
-        public Board EmptyBoard = new Board();
+        //public Board EmptyBoard = new Board();
         private Player Player1;
         private Player Player2;
         private Player CurrentPlayer;
