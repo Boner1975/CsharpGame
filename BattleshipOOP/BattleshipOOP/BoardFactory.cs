@@ -59,7 +59,7 @@ namespace BattleshipOOP
                     {
                         y2 = ChooseDirection(y1, shipSize, ascending);
                     }
-                } while (board.PlaceShip(ship, x1,y1,x2,y2));
+                } while (!board.PlaceShip(ship, x1,y1,x2,y2));
             }
 
             return (board, ships);
