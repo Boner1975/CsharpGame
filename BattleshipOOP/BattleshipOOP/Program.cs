@@ -7,8 +7,9 @@ namespace BattleshipOOP
         static void Main(string[] args)
         {
             Board board = new Board(10);
-            Display.DrawBoardPosition(board);
-            Display.DrawBoardCharacter(board);
+            Display display = new Display();
+            display.DrawBoardPosition(board);
+            display.DrawBoardCharacter(board);
             //Console.WriteLine(board.ocean.Length); 
             //Square square = new Square(1, 1);
             //Console.WriteLine(square.GetCharacter());

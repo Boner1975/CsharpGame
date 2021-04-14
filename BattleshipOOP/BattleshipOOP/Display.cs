@@ -4,9 +4,13 @@ using System.Text;
 
 namespace BattleshipOOP
 {
-    public static class Display
+    public class Display
     {
-        public static void DrawBoardPosition(Board board)
+        public Display()
+        {
+
+        }
+        public void DrawBoardPosition(Board board)
         {
             for (int i = 0; i < board.size; i++)
             {
@@ -17,7 +21,7 @@ namespace BattleshipOOP
                 Console.WriteLine();
             }
         }
-        public static void DrawBoardCharacter(Board board)
+        public void DrawBoardCharacter(Board board)
         {
             for (int i = 0; i < board.size; i++)
             {
