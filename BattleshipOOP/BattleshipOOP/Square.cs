@@ -34,11 +34,11 @@ namespace BattleshipOOP
         public int y;
         public SquareStatus SquareStatus;
 
-        public (int, int) Position
+        public Tuple<int, int> Position
         {
             get
             {
-                return (x, y);
+                return Tuple.Create(x, y);
             }
         }
 
@@ -53,6 +53,25 @@ namespace BattleshipOOP
         {
             return (char)SquareStatus; 
         }
-    }
 
+        public void ShipCreation()
+        {
+            if (SquareStatus == SquareStatus.Empty)
+            {
+                SquareStatus = SquareStatus.Ship;
+            }
+        }
+
+        public void ShipHit()
+        {
+            if (SquareStatus == SquareStatus.Ship)
+            {
+                SquareStatus = SquareStatus.Hit;
+            }
+            else
+            {
+                SquareStatus = SquareStatus.Missed;
+            }
+        }
+    }
 }
