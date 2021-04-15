@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace BattleshipOOP
 {
     public class Ship
     {
-        internal enum ShipType
+        public enum ShipType
         {
             Carrier = 5,
             Battleship = 4,
@@ -17,7 +18,7 @@ namespace BattleshipOOP
 
         private List<Square> location;
 
-        internal Ship(ShipType type)
+        public Ship(ShipType type)
         {
             Type = type;
         }
@@ -25,6 +26,11 @@ namespace BattleshipOOP
         internal void SetCoordinates(List<Square> coordinates)
         {
             location = coordinates;
+        }
+
+        public List<Square> GetLocation()
+        {
+            return location;
         }
     }
 }
