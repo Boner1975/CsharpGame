@@ -26,5 +26,10 @@ namespace BattleshipOOP
         {
             location = coordinates;
         }
+
+        internal List<Square> GetLocation()
+        {
+            return location;
+        }
     }
 }
