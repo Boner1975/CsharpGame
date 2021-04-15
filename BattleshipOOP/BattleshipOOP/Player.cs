@@ -6,12 +6,14 @@ namespace BattleshipOOP
 {
     public class Player
     {
+        private string Name;
         private List<Ship> list;
         private bool IsAlive;
         private bool IsHuman;
 
-        public Player(bool isHuman = true)
+        public Player(string name = "", bool isHuman = true)
         {
+            this.Name = name;
             this.IsAlive = true;
             this.IsHuman = isHuman;
         }
@@ -24,7 +26,7 @@ namespace BattleshipOOP
 
         private void CheckPlayerStatus()
         {
-            this.IsAlive = list.Count > 0;
+            this.IsAlive = !(list is null) ? list.Count > 0 : false;
         }
         
         public bool GetIsHuman()
@@ -42,11 +44,13 @@ namespace BattleshipOOP
             bool squareInList = false;
             int shipIndex = 0;
 
-            do
+            while (!(list is null) && !squareInList && shipIndex < list.Count)
             {
                 squareInList = SuccessfullHit1(list[shipIndex], square);
                 shipIndex++;
-            } while (!squareInList && shipIndex < list.Count);
+            }
+
+            Console.ReadKey();
         }
         
         private bool SuccessfullHit1(Ship ship, Square square)

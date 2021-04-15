@@ -6,6 +6,7 @@ namespace BattleshipOOP
     {
         static void Main(string[] args)
         {
+            /*
             Board board = new Board(10);
             Display display = new Display();
             display.DrawBoardPosition(board);
@@ -18,11 +19,16 @@ namespace BattleshipOOP
             //Square square = new Square(1, 1);
             //Console.WriteLine(square.GetCharacter());
             //Console.WriteLine(square.Position);
+            */
 
-            Console.ReadKey();
+            //Console.ReadKey();
+
+            Input input = new Input();
+            Game game = new Game();
+            game.RunGame();
             
             //Display display = new Display();
-            display.PrintMainMenu();
+            //display.PrintMainMenu();
         }
     }
 }
