@@ -6,6 +6,8 @@ namespace BattleshipOOP
 {
     public class Display
     {
+        string name;
+        int boardSize;
         public Display()
         {
 
@@ -32,8 +34,15 @@ namespace BattleshipOOP
                 Console.WriteLine();
             }
         }
-        
-        
+        public void PrintMessageInLine(string message)
+        {
+            Console.Write(message);
+        }
+        public void PrintMessage(string message)
+        {
+            Console.WriteLine(message);
+        }
+
         public void PrintMainMenu()
         {
             ConsoleKey key;
@@ -58,6 +67,7 @@ namespace BattleshipOOP
                 Console.Out.WriteLine(menu.ManageOptions(menu.selectedOptionIndex, i));
             }
         }
-        
+
+
     }
 }
