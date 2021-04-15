@@ -14,6 +14,11 @@ namespace BattleshipOOP
             //Square square = new Square(1, 1);
             //Console.WriteLine(square.GetCharacter());
             //Console.WriteLine(square.Position);
+
+            Console.ReadKey();
+            
+            //Display display = new Display();
+            display.PrintMainMenu();
         }
     }
 }
