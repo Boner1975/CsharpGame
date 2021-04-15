@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace BattleshipOOP
 {
@@ -25,6 +26,11 @@ namespace BattleshipOOP
         internal void SetCoordinates(List<Square> coordinates)
         {
             location = coordinates;
+        }
+
+        internal List<Square> GetLocation()
+        {
+            return location;
         }
     }
 }
