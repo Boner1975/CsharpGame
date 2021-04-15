@@ -8,12 +8,12 @@ namespace BattleshipOOP
     {
         Display display = new Display();
         Utility utility = new Utility();
-
+        string size = "";
         //Board size
         public int GetBoardSize()
         {
             bool isValidSize = false;
-            string size = "";
+            ;
             while (!isValidSize)
             {
                 display.PrintMessageInLine("Please choose board size from 10 to 20: ");
@@ -71,11 +71,21 @@ namespace BattleshipOOP
                 if (location.Length == 2 && int.TryParse(location[1].ToString(), out _) && Char.IsLetter(location[0]))
                 {
                     list = utility.StringToIntTransformation(location);
+                    if (list[0] > int.Parse(size) - 1 || list[1] > int.Parse(size) - 1)
+                    {
+                        display.PrintMessage("Location out of range");
+                        continue;
+                    }
                     isValidEntry = true;
                 }
                 else if (location.Length == 3 && int.TryParse((location[1].ToString() + location[2].ToString()), out _) && Char.IsLetter(location[0]))
                 {
                     list = utility.StringToIntTransformation(location);
+                    if (list[0] > int.Parse(size) - 1 || list[1] > int.Parse(size) - 1)
+                    {
+                        display.PrintMessage("Location out of range");
+                        continue;
+                    }
                     isValidEntry = true;
                 }
                 else

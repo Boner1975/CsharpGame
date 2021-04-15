@@ -11,13 +11,14 @@ namespace BattleshipOOP
             var list = new List<int>();
             if (location.Length == 2)
             {
+                list.Add(((int)char.Parse(location[0].ToString().ToUpper())) - 65);
                 list.Add(int.Parse(location[1].ToString()) - 1);
             }
             else if (location.Length == 3)
             {
-                list.Add(int.Parse(location[1].ToString() + location[2].ToString()));
+                list.Add(((int)char.Parse(location[0].ToString().ToUpper())) - 65);
+                list.Add(int.Parse(location[1].ToString() + location[2].ToString()) - 1);
             }
-            list.Add(((int)char.Parse(location[0].ToString().ToUpper())) - 65);
             return list;
         }
         public string CoordinatesTransformation(int x, int y)
