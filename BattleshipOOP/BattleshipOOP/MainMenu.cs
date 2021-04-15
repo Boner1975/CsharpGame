@@ -9,8 +9,25 @@ namespace BattleshipOOP
     {
         internal string mainMenu = "Main menu:\n";
         internal string[] optionsList = new[] {"Start New Game", "Instruction", "High scores", "Quit"};
-        internal int selectedOptionIndex = 0;
+        internal int selectedOptionIndex;
         internal int lastOptionIndex;
+        private Display display = new Display();
+
+
+        public int RunMainMenu()
+        {
+            ConsoleKey key;
+            selectedOptionIndex = 0;
+            
+            do
+            {
+                display.PrintMainMenu(selectedOptionIndex);
+                key = Console.ReadKey().Key;
+                ManageKeys(key);
+            } while (key != ConsoleKey.Enter);
+
+            return selectedOptionIndex;
+        }
 
 
         internal string ManageOptions(int selectedOptionIndex, int optionIndex)
@@ -28,9 +45,6 @@ namespace BattleshipOOP
                     break;
                 case ConsoleKey.DownArrow:
                     selectedOptionIndex = selectedOptionIndex < lastOptionIndex ? selectedOptionIndex + 1 : 0;
-                    break;
-                case ConsoleKey.Enter:
-                    selectedOptionIndex = 0;
                     break;
             }
         }

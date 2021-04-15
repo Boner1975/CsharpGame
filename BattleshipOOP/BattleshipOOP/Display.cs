@@ -43,28 +43,21 @@ namespace BattleshipOOP
             Console.WriteLine(message);
         }
 
-        public void PrintMainMenu()
+        public void PrintMainMenu(int optionIndex)
         {
-            ConsoleKey key;
             MainMenu mM = new MainMenu();
-
-            do
-            {
-                Console.Clear();
-                Console.Out.WriteLine(mM.gameLogo);
-                Console.Out.WriteLine(mM.mainMenu);
-                PrintOptions(mM);
-                
-                key = Console.ReadKey().Key;
-                mM.ManageKeys(key);
-            } while (key != ConsoleKey.Enter);
+            
+            Console.Clear();
+            Console.Out.WriteLine(mM.gameLogo);
+            Console.Out.WriteLine(mM.mainMenu);
+            PrintOptions(mM, optionIndex);
         }
 
-        private void PrintOptions(MainMenu menu)
+        private void PrintOptions(MainMenu menu, int optionIndex)
         {
             for (int i = 0; i < menu.optionsList.Length; i++)
             {
-                Console.Out.WriteLine(menu.ManageOptions(menu.selectedOptionIndex, i));
+                Console.Out.WriteLine(menu.ManageOptions(optionIndex, i));
             }
         }
 

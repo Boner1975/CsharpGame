@@ -6,11 +6,16 @@ namespace BattleshipOOP
 {
     class Input
     {
+        /*
         Display display = new Display();
         Utility utility = new Utility();
+        Board board = new Board(10);
+        */
         string size = "";
+        
+
         //Board size
-        public int GetBoardSize()
+        public int GetBoardSize(Display display)
         {
             bool isValidSize = false;
             ;
@@ -36,7 +41,7 @@ namespace BattleshipOOP
         }
 
         //Player names
-        public string GetPlayerName()
+        public string GetPlayerName(Display display)
         {
             bool isValidName = false;
             string name = "";
@@ -59,7 +64,7 @@ namespace BattleshipOOP
         //Ship type
 
         //Ship location on placement
-        public List<int> GetLocation()
+        public List<int> GetLocation(Display display, Utility utility, Board board)
         {
             bool isValidEntry = false;
             string location;
@@ -71,7 +76,7 @@ namespace BattleshipOOP
                 if (location.Length == 2 && int.TryParse(location[1].ToString(), out _) && Char.IsLetter(location[0]))
                 {
                     list = utility.StringToIntTransformation(location);
-                    if (list[0] > int.Parse(size) - 1 || list[1] > int.Parse(size) - 1)
+                    if (list[0] > (int.Parse(board.size.ToString())) - 1 || list[1] > (int.Parse(board.size.ToString())) - 1)
                     {
                         display.PrintMessage("Location out of range");
                         continue;
@@ -81,7 +86,7 @@ namespace BattleshipOOP
                 else if (location.Length == 3 && int.TryParse((location[1].ToString() + location[2].ToString()), out _) && Char.IsLetter(location[0]))
                 {
                     list = utility.StringToIntTransformation(location);
-                    if (list[0] > int.Parse(size) - 1 || list[1] > int.Parse(size) - 1)
+                    if (list[0] > (int.Parse(board.size.ToString())) - 1 || list[1] > (int.Parse(board.size.ToString())) - 1)
                     {
                         display.PrintMessage("Location out of range");
                         continue;
@@ -94,6 +99,33 @@ namespace BattleshipOOP
                 }
             }
             return list;
+        }
+
+        public bool ManageMenuInput(int menuChoice)
+        {
+            bool finishGame = false;
+            
+            switch (menuChoice)
+            {
+                case 0:
+                    Game game = new Game();
+                    game.RunGame();
+                    finishGame = false;
+                    break;
+                case 1:
+                    //Show instructions
+                    finishGame = false;
+                    break;
+                case 2:
+                    //show highscores
+                    finishGame = false;
+                    break;
+                case 3:
+                    finishGame = true;
+                    break;
+            }
+
+            return finishGame;
         }
 
         //Ship location on fireing
