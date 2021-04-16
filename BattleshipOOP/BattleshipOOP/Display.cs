@@ -6,8 +6,8 @@ namespace BattleshipOOP
 {
     public class Display
     {
-        string name;
-        int boardSize;
+        public static string spacingForOneDigitCols = "  ";
+        public static string spacingForTwoDigitsCols = " ";
         public Display()
         {
 
@@ -34,10 +34,51 @@ namespace BattleshipOOP
                 Console.WriteLine();
             }
         }
+
+        public void DrawClearBoard(Board board)
+        {
+            Console.WriteLine();
+            Console.Write("        ");
+            for (int i = 0; i < board.size; i++)
+            {
+                if (i < 9)
+                {
+                    Console.Write(" " + (i + 1) + spacingForOneDigitCols);
+                }
+                else
+                {
+                    Console.Write(" " + (i + 1) + spacingForTwoDigitsCols);
+                }
+            }
+            Console.WriteLine();
+            for (int i = 0; i < board.size; i++)
+            {
+                Console.Write("       +");
+                for (int i1 = 0; i1 < board.size; i1++)
+                {
+                    Console.Write("---+");
+                }
+                Console.WriteLine();
+                Console.Write("    " + (char)(i + 65) + "  |");
+                for (int i2 = 0; i2 < board.size; i2++)
+                {
+                    Console.Write(" ~ |");
+                }
+                Console.WriteLine();
+            }
+            Console.Write("       +");
+            for (int i = 0; i < board.size; i++)
+            {
+                Console.Write("---+");
+            }
+            Console.WriteLine();
+        }
+
         public void PrintMessageInLine(string message)
         {
             Console.Write(message);
         }
+
         public void PrintMessage(string message)
         {
             Console.WriteLine(message);
