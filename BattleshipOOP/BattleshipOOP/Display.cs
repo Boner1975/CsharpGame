@@ -35,8 +35,10 @@ namespace BattleshipOOP
             }
         }
 
-        public void DrawClearBoard(Board board)
+        public void DrawClearBoard(Board board, Player player)
         {
+            Console.WriteLine();
+            Console.WriteLine($"{player.Name} board");
             Console.WriteLine();
             Console.Write("        ");
             for (int i = 0; i < board.size; i++)
@@ -60,9 +62,9 @@ namespace BattleshipOOP
                 }
                 Console.WriteLine();
                 Console.Write("    " + (char)(i + 65) + "  |");
-                for (int i2 = 0; i2 < board.size; i2++)
+                for (int j = 0; j < board.size; j++)
                 {
-                    Console.Write(" ~ |");
+                    Console.Write($" {board.ocean[i, j].GetCharacter()} |");
                 }
                 Console.WriteLine();
             }
@@ -72,6 +74,10 @@ namespace BattleshipOOP
                 Console.Write("---+");
             }
             Console.WriteLine();
+        }
+        public void DrawGameBoards(Board board1, Board board2, Player player1, Player player2)
+        {
+
         }
 
         public void PrintMessageInLine(string message)

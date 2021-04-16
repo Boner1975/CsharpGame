@@ -6,13 +6,7 @@ namespace BattleshipOOP
 {
     class Input
     {
-        /*
-        Display display = new Display();
-        Utility utility = new Utility();
-        Board board = new Board(10);
-        */
         string size = "";
-        
 
         //Board size
         public int GetBoardSize(Display display)

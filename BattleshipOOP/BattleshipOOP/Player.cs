@@ -6,14 +6,21 @@ namespace BattleshipOOP
 {
     public class Player
     {
-        private string Name;
+        private string name;
+        public string Name 
+        { 
+            get
+            {
+                return name;
+            }
+        }
         private List<Ship> list;
         private bool IsAlive;
         private bool IsHuman;
 
         public Player(string name = "", bool isHuman = true)
         {
-            this.Name = name;
+            this.name = name;
             this.IsAlive = true;
             this.IsHuman = isHuman;
         }
