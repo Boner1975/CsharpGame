@@ -6,8 +6,9 @@ namespace BattleshipOOP
 {
     public class Display
     {
-        public static string spacingForOneDigitCols = "  ";
-        public static string spacingForTwoDigitsCols = " ";
+        public string spacingForOneDigitCols = "  ";
+        public string spacingForTwoDigitsCols = " ";
+        
         public Display()
         {
 
@@ -35,10 +36,11 @@ namespace BattleshipOOP
             }
         }
 
-        public void DrawClearBoard(Board board, Player player)
+        public void DrawClearBoard(Board board, Player player, Utility utility)
         {
+            string leftMargin = utility.NickPosition(board.size, player.Name);
             Console.WriteLine();
-            Console.WriteLine($"{player.Name} board");
+            Console.WriteLine($"{leftMargin}{player.Name} board");
             Console.WriteLine();
             Console.Write("        ");
             for (int i = 0; i < board.size; i++)

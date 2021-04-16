@@ -27,5 +27,12 @@ namespace BattleshipOOP
             string stringCol = (x + 1).ToString();
             return (stringRow + stringCol);
         }
+
+        public string NickPosition(int size, string nick)
+        {
+            int leftMargin = (9 + 4 * size - nick.Length) / 2;
+            string Margin = new string(' ', leftMargin);
+            return Margin;
+        }
     }
 }
