@@ -30,7 +30,7 @@ namespace BattleshipOOP
 
         public string NickPosition(int size, string nick)
         {
-            int leftMargin = (9 + 4 * size - nick.Length) / 2;
+            int leftMargin = (4 * size - nick.Length) / 2;
             string Margin = new string(' ', leftMargin);
             return Margin;
         }

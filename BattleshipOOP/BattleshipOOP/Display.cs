@@ -8,6 +8,7 @@ namespace BattleshipOOP
     {
         public string spacingForOneDigitCols = "  ";
         public string spacingForTwoDigitsCols = " ";
+        string text = "board for ship placement";
         
         public Display()
         {
@@ -38,9 +39,12 @@ namespace BattleshipOOP
 
         public void DrawClearBoard(Board board, Player player, Utility utility)
         {
-            string leftMargin = utility.NickPosition(board.size, player.Name);
+            string leftMarginPlayer = utility.NickPosition(board.size, player.Name);
+            string leftMarginText = utility.NickPosition(board.size, text);
+            string tab = new string(' ', 8);
             Console.WriteLine();
-            Console.WriteLine($"{leftMargin}{player.Name} board");
+            Console.WriteLine($"{tab}{leftMarginPlayer}{player.Name}");
+            Console.WriteLine($"{tab}{leftMarginText}{text}");
             Console.WriteLine();
             Console.Write("        ");
             for (int i = 0; i < board.size; i++)
@@ -75,11 +79,59 @@ namespace BattleshipOOP
             {
                 Console.Write("---+");
             }
-            Console.WriteLine();
+            Console.WriteLine(); Console.WriteLine();
         }
-        public void DrawGameBoards(Board board1, Board board2, Player player1, Player player2)
+        public void DrawGameBoards(Board board1, Board board2, Player player1, Player player2, Utility utility)
         {
-
+            string MarginPlayer1 = utility.NickPosition(board1.size, player1.Name);
+            string MarginPlayer2 = utility.NickPosition(board1.size, player2.Name);
+            string boardBorder = new StringBuilder().Insert(0, "---+", board1.size).ToString();
+            string tab = new string(' ', 8);
+            string tab2 = new string(' ', 7);
+            Console.WriteLine();
+            Console.WriteLine($"{tab}{MarginPlayer1}{player1.Name}{MarginPlayer1}{tab}{MarginPlayer2}{player2.Name}");
+            Console.WriteLine();
+            for (int multi = 0; multi <= 1; multi++)
+            {
+                Console.Write(tab);
+                for (int i = 0; i < board1.size; i++)
+                {
+                    if (i < 9)
+                    {
+                        Console.Write($" {i + 1}{spacingForOneDigitCols}");
+                    }
+                    else
+                    {
+                        Console.Write($" {i + 1}{spacingForTwoDigitsCols}");
+                    }
+                }
+            }
+            Console.WriteLine();
+            for (int i = 0; i <= 2 * board1.size; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    Console.WriteLine();
+                    Console.Write($"       +{boardBorder}{tab2}+{boardBorder}");
+                }
+                
+                if (i % 2 != 0)
+                {
+                    Console.WriteLine();
+                    Console.Write($"    {(char)(i / 2 + 65)}  |");
+                    for (int j = 0; j < board1.size; j++)
+                    {
+                        Console.Write($" {board2.ocean[i/2, j].GetCharacter()} |");
+                    }
+                    Console.Write($"    {(char)(i / 2 + 65)}  |");
+                    for (int j = 0; j < board1.size; j++)
+                    {
+                        Console.Write($" {board1.ocean[i / 2, j].GetCharacter()} |");
+                    }
+                }
+            }
+            Console.WriteLine();
+            Console.WriteLine();
         }
 
         public void PrintMessageInLine(string message)
