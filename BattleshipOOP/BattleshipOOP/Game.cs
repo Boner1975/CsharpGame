@@ -12,10 +12,12 @@ namespace BattleshipOOP
         private Player Player1;
         private Player Player2;
         private Player CurrentPlayer;
+        private Player Opponent;
         private BoardFactory bf = new BoardFactory();
         private Input input = new Input();
         private Display display = new Display();
         private Utility utility = new Utility();
+        
 
 
         public void RunGame()
@@ -26,15 +28,16 @@ namespace BattleshipOOP
 
             do
             {
-                SwitchPlayers();
+                CurrentPlayer = SwitchPlayers();
+                Opponent = SwitchPlayers();
                 Round();
-            } while (CurrentPlayer.GetIsAlive());
+            } while (Opponent.GetIsAlive());
         }
 
         private void DefineBoards()
         {
-            Board1 = DefineBoardsAndSetShips(BoardSize, Player1);
-            Board2 = DefineBoardsAndSetShips(BoardSize, Player2);
+            Board2 = DefineBoardsAndSetShips(BoardSize, Player1);
+            Board1 = DefineBoardsAndSetShips(BoardSize, Player2);
         }
 
         private Board DefineBoardsAndSetShips(int boardSize, Player player)
@@ -52,19 +55,18 @@ namespace BattleshipOOP
             CurrentPlayer = Player2;
         }
 
-        private void SwitchPlayers()
+        private Player SwitchPlayers()
         {
-            CurrentPlayer = CurrentPlayer.Equals(Player2) ? Player1 : Player2;
+            return CurrentPlayer.Equals(Player2) ? Player1 : Player2;
         }
 
         private void Round()
         {
             Board board = CurrentPlayer.Equals(Player1) ? Board1 : Board2;
-            //display.DrawBoardCharacter(board);
-            display.DrawClearBoard(board, CurrentPlayer, utility);
+            display.DrawGameBoards(Board1, Board2, Player1, Player2, utility);
             Square selectedSquare = GetSquareByCoordinates(input.GetLocation(display,utility,board), board);
-            CurrentPlayer.CheckShot(selectedSquare);
-            Console.Out.WriteLine(selectedSquare);
+            CurrentPlayer.CheckShot(selectedSquare, Opponent);
+            CheckWin();
         }
 
         private Square GetSquareByCoordinates(List<int> coordinates, Board board)
@@ -82,6 +84,14 @@ namespace BattleshipOOP
 
             return null;
 
+        }
+
+        private void CheckWin()
+        {
+            if (!Opponent.GetIsAlive())
+            {
+                display.PrintMessage($"Player {(CurrentPlayer.Name)} win! Congratulations!!!");
+            }
         }
     }
 }
