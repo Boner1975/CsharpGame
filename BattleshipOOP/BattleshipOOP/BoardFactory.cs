@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace BattleshipOOP
 {
@@ -16,19 +17,11 @@ namespace BattleshipOOP
             return new List<Ship> {
                 {new Ship(Ship.ShipType.Carrier) },
                 {new Ship(Ship.ShipType.Battleship) },
-                //{new Ship(Ship.ShipType.Battleship) },
                 {new Ship(Ship.ShipType.Cruiser) },
-                //{new Ship(Ship.ShipType.Cruiser) },
-                //{new Ship(Ship.ShipType.Cruiser) },
                 {new Ship(Ship.ShipType.Destroyer) },
                 {new Ship(Ship.ShipType.Destroyer) },
-                //{new Ship(Ship.ShipType.Destroyer) },
-                //{new Ship(Ship.ShipType.Destroyer) },
                 {new Ship(Ship.ShipType.Submarine) },
-                {new Ship(Ship.ShipType.Submarine) },
-                //{new Ship(Ship.ShipType.Submarine) },
-                //{new Ship(Ship.ShipType.Submarine) },
-                //{new Ship(Ship.ShipType.Submarine) }
+                {new Ship(Ship.ShipType.Submarine) }
             };
         }
 
@@ -41,13 +34,14 @@ namespace BattleshipOOP
             {
                 int shipSize = (int)ship.Type;
                 int x1, x2, y1, y2;
+                int counter = 0;
                 do
                 {
-                    x1 = random.Next(0, size - 1);
-                    y1 = random.Next(0, size - 1);
+                    x1 = random.Next(0, size);
+                    y1 = random.Next(0, size);
 
-                    int direction = random.Next(0, 1);
-                    int ascending = random.Next(0, 1);
+                    int direction = random.Next(0, 2);
+                    int ascending = random.Next(0, 2);
 
                     x2 = x1;
                     y2 = y1;
@@ -59,6 +53,9 @@ namespace BattleshipOOP
                     {
                         y2 = ChooseDirection(y1, shipSize, ascending);
                     }
+                    if (counter > 1_000_000)
+                        throw new Exception("There is a problem whith ships random placement after 1000000 tries");
+
                 } while (!board.PlaceShip(ship, x1,y1,x2,y2, player));
             }
 
@@ -80,9 +77,10 @@ namespace BattleshipOOP
             return y2;
         }
 
-        public void ManualPlacement()
+        public void ManualPlacement(int size)
         {
-            //to be implemented
+            Board board = CreateBoard(size);
+            List<Ship> ships = CreateListOfShips();
         }
     }
 }

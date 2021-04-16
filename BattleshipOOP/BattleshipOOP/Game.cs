@@ -63,7 +63,7 @@ namespace BattleshipOOP
             //display.DrawBoardCharacter(board);
             display.DrawClearBoard(board, CurrentPlayer, utility);
             Square selectedSquare = GetSquareByCoordinates(input.GetLocation(display,utility,board), board);
-            CurrentPlayer.CheckShot1(selectedSquare);
+            CurrentPlayer.CheckShot(selectedSquare);
             Console.Out.WriteLine(selectedSquare);
         }
 
