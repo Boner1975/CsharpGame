@@ -25,7 +25,7 @@ namespace BattleshipOOP
             }
         }
 
-        public bool PlaceShip(Ship ship, int x1, int y1, int x2, int y2)
+        public bool PlaceShip(Ship ship, int x1, int y1, int x2, int y2, Player player)
         {
             if (x1 < 0 || x1 >= size ||
                 y1 < 0 || y1 >= size ||
@@ -95,6 +95,7 @@ namespace BattleshipOOP
             }
 
             ship.SetCoordinates(list);
+            player.AddShipToList(ship);
 
             return true;
         }

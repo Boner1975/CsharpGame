@@ -23,6 +23,7 @@ namespace BattleshipOOP
             this.name = name;
             this.IsAlive = true;
             this.IsHuman = isHuman;
+            this.list = new List<Ship>();
         }
 
         public bool GetIsAlive()
@@ -46,21 +47,32 @@ namespace BattleshipOOP
             this.list = list;
         }
 
-        public void CheckShot1(Square square)
+        public void AddShipToList(Ship ship)
+        {
+            this.list.Add(ship);
+        }
+
+        public void CheckShot(Square square)
         {
             bool squareInList = false;
             int shipIndex = 0;
 
             while (!(list is null) && !squareInList && shipIndex < list.Count)
             {
-                squareInList = SuccessfullHit1(list[shipIndex], square);
+                squareInList = SuccessfullHit(list[shipIndex], square);
+
+                if (!squareInList)
+                {
+                    square.SquareStatus = SquareStatus.Missed;
+                }
+                
                 shipIndex++;
             }
 
             Console.ReadKey();
         }
         
-        private bool SuccessfullHit1(Ship ship, Square square)
+        private bool SuccessfullHit(Ship ship, Square square)
         {
             if (ship.GetLocation().Contains(square))
             {

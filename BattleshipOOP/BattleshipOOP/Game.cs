@@ -40,7 +40,7 @@ namespace BattleshipOOP
         private Board DefineBoardsAndSetShips(int boardSize, Player player)
         {
             //(Board board, List<Ship> list) = player.GetIsHuman() ? bf.ManualPlacement() : bf.RandomPlacement(boardSize);
-            (Board board, List<Ship> list) = bf.RandomPlacement(boardSize);
+            (Board board, List<Ship> list) = bf.RandomPlacement(boardSize,player);
             player.SetListOfShips(list);
             return board;
         }
@@ -60,9 +60,10 @@ namespace BattleshipOOP
         private void Round()
         {
             Board board = CurrentPlayer.Equals(Player1) ? Board1 : Board2;
-            display.DrawBoardCharacter(board);
+            //display.DrawBoardCharacter(board);
+            display.DrawClearBoard(board, CurrentPlayer, utility);
             Square selectedSquare = GetSquareByCoordinates(input.GetLocation(display,utility,board), board);
-            CurrentPlayer.CheckShot1(selectedSquare);
+            CurrentPlayer.CheckShot(selectedSquare);
             Console.Out.WriteLine(selectedSquare);
         }
 
