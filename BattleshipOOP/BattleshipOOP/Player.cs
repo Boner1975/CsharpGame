@@ -23,6 +23,7 @@ namespace BattleshipOOP
             this.name = name;
             this.IsAlive = true;
             this.IsHuman = isHuman;
+            this.list = new List<Ship>();
         }
 
         public bool GetIsAlive()
@@ -44,6 +45,11 @@ namespace BattleshipOOP
         public void SetListOfShips(List<Ship> list)
         {
             this.list = list;
+        }
+
+        public void AddShipToList(Ship ship)
+        {
+            this.list.Add(ship);
         }
 
         public void CheckShot1(Square square)

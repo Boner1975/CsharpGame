@@ -16,23 +16,23 @@ namespace BattleshipOOP
             return new List<Ship> {
                 {new Ship(Ship.ShipType.Carrier) },
                 {new Ship(Ship.ShipType.Battleship) },
-                {new Ship(Ship.ShipType.Battleship) },
+                //{new Ship(Ship.ShipType.Battleship) },
                 {new Ship(Ship.ShipType.Cruiser) },
-                {new Ship(Ship.ShipType.Cruiser) },
-                {new Ship(Ship.ShipType.Cruiser) },
+                //{new Ship(Ship.ShipType.Cruiser) },
+                //{new Ship(Ship.ShipType.Cruiser) },
                 {new Ship(Ship.ShipType.Destroyer) },
                 {new Ship(Ship.ShipType.Destroyer) },
-                {new Ship(Ship.ShipType.Destroyer) },
-                {new Ship(Ship.ShipType.Destroyer) },
+                //{new Ship(Ship.ShipType.Destroyer) },
+                //{new Ship(Ship.ShipType.Destroyer) },
                 {new Ship(Ship.ShipType.Submarine) },
                 {new Ship(Ship.ShipType.Submarine) },
-                {new Ship(Ship.ShipType.Submarine) },
-                {new Ship(Ship.ShipType.Submarine) },
-                {new Ship(Ship.ShipType.Submarine) }
+                //{new Ship(Ship.ShipType.Submarine) },
+                //{new Ship(Ship.ShipType.Submarine) },
+                //{new Ship(Ship.ShipType.Submarine) }
             };
         }
 
-        public (Board, List<Ship>) RandomPlacement(int size)
+        public (Board, List<Ship>) RandomPlacement(int size, Player player)
         {
             Board board = CreateBoard(size);
             List<Ship> ships = CreateListOfShips();
@@ -59,7 +59,7 @@ namespace BattleshipOOP
                     {
                         y2 = ChooseDirection(y1, shipSize, ascending);
                     }
-                } while (!board.PlaceShip(ship, x1,y1,x2,y2));
+                } while (!board.PlaceShip(ship, x1,y1,x2,y2, player));
             }
 
             return (board, ships);
