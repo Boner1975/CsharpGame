@@ -13,6 +13,7 @@ namespace BattleshipOOP
         private Player Player2;
         private Player CurrentPlayer;
         private Player Opponent;
+        private bool[] PlayersAreHumans;
         private BoardFactory bf = new BoardFactory();
         private Input input = new Input();
         private Display display = new Display();
@@ -22,6 +23,7 @@ namespace BattleshipOOP
 
         public void RunGame()
         {
+            ChooseMode();
             this.BoardSize = input.GetBoardSize(display);
             DefinePlayers();
             DefineBoards();
@@ -34,6 +36,14 @@ namespace BattleshipOOP
             } while (Opponent.GetIsAlive());
         }
 
+
+        private void ChooseMode()
+        {
+            MainMenu menu = new MainMenu();
+            int optionIndex = menu.RunMenu("mode");
+            PlayersAreHumans = input.ManageModeInput(optionIndex);
+        }
+
         private void DefineBoards()
         {
             Board2 = DefineBoardsAndSetShips(BoardSize, Player1);
@@ -42,16 +52,19 @@ namespace BattleshipOOP
 
         private Board DefineBoardsAndSetShips(int boardSize, Player player)
         {
-            //(Board board, List<Ship> list) = player.GetIsHuman() ? bf.ManualPlacement() : bf.RandomPlacement(boardSize);
-            (Board board, List<Ship> list) = bf.RandomPlacement(boardSize,player);
+            (Board board, List<Ship> list) = player.GetIsHuman() ? bf.ManualPlacement(boardSize, display, input, utility, player) : bf.RandomPlacement(boardSize, player);
+            //(Board board, List<Ship> list) = bf.RandomPlacement(boardSize,player);
             player.SetListOfShips(list);
             return board;
         }
 
-        private void DefinePlayers(bool isHuman = true)
+        private void DefinePlayers()
         {
-            Player1 = new Player(isHuman ? input.GetPlayerName(display) : "Player1", isHuman);
-            Player2 = new Player(isHuman ? input.GetPlayerName(display) : "Player2", isHuman);
+            bool player1IsHuman = PlayersAreHumans[0];
+            bool player2IsHuman = PlayersAreHumans[1];
+            
+            Player1 = new Player(player1IsHuman ? input.GetPlayerName(display) : "Player1", player1IsHuman);
+            Player2 = new Player(player2IsHuman ? input.GetPlayerName(display) : "Player2", player2IsHuman);
             CurrentPlayer = Player2;
         }
 

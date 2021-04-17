@@ -163,6 +163,25 @@ namespace BattleshipOOP
 
             return finishGame;
         }
+        
+        public bool[] ManageModeInput(int modeChoice)
+        {
+            bool player1 = true;
+            bool player2 = true;
+
+            switch (modeChoice)
+            {
+                case 1:
+                    player2 = false;
+                    break;
+                case 2:
+                    player1 = false;
+                    player2 = false;
+                    break;
+            }
+
+            return new bool[] { player1, player2 };
+        }
 
         //Ship location on fireing
     }

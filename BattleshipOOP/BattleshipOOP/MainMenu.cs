@@ -8,34 +8,37 @@ namespace BattleshipOOP
     public class MainMenu
     {
         internal string mainMenu = "Main menu:\n";
-        internal string[] optionsList = new[] {"Start New Game", "Instruction", "High scores", "Quit"};
+        internal string modeSelectionText = "Choose one of the following modes:\n";
+        internal string[] MenuOptionsList = new[] {"Start New Game", "Instruction", "High scores", "Quit"};
+        internal string[] ModeOptionsList = new[] {"HUMAN vs HUMAN", "HUMAN vs COMPUTER", "COMPUTER vs COMPUTER"};
         internal int selectedOptionIndex;
         internal int lastOptionIndex;
         private Display display = new Display();
 
 
-        public int RunMainMenu()
+        public int RunMenu(string menuType = "mainMenu")
         {
             ConsoleKey key;
             selectedOptionIndex = 0;
+            bool isMainMenu = menuType == "mainMenu";
             
             do
             {
-                display.PrintMainMenu(selectedOptionIndex);
+                display.PrintMainMenu(selectedOptionIndex, menuType);
                 key = Console.ReadKey().Key;
-                ManageKeys(key);
+                ManageKeys(key, isMainMenu ? MenuOptionsList : ModeOptionsList);
             } while (key != ConsoleKey.Enter);
 
             return selectedOptionIndex;
         }
 
 
-        internal string ManageOptions(int selectedOptionIndex, int optionIndex)
+        internal string ManageOptions(int selectedOptionIndex, string[] optionsList,  int optionIndex)
         {
             return selectedOptionIndex == optionIndex ? $" –> {optionsList[optionIndex]}" : $"    {optionsList[optionIndex]}";
         }
 
-        internal void ManageKeys(ConsoleKey key)
+        internal void ManageKeys(ConsoleKey key, string[] optionsList)
         {
             lastOptionIndex = optionsList.Length - 1;
             switch (key)

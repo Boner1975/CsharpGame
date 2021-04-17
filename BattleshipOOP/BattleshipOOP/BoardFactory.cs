@@ -75,7 +75,7 @@ namespace BattleshipOOP
             return y2;
         }
 
-        public void ManualPlacement(int size, Display display, Input input, Utility utility, Player player)
+        public (Board, List<Ship>) ManualPlacement(int size, Display display, Input input, Utility utility, Player player)
         {
             Board board = CreateBoard(size);
             List<Ship> ships = CreateListOfShips();
@@ -111,6 +111,8 @@ namespace BattleshipOOP
                     }
                 } while (!isCorrect);
             }
+
+            return (board, ships);
         }
     }
 }
