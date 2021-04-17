@@ -52,8 +52,17 @@ namespace BattleshipOOP
 
         private Board DefineBoardsAndSetShips(int boardSize, Player player)
         {
-            (Board board, List<Ship> list) = player.GetIsHuman() ? bf.ManualPlacement(boardSize, display, input, utility, player) : bf.RandomPlacement(boardSize, player);
-            //(Board board, List<Ship> list) = bf.RandomPlacement(boardSize,player);
+            Board board;
+            List<Ship> list;
+
+            switch (player.GetIsHuman())
+            {
+                case true:
+                    (board, list) = bf.ManualPlacement(boardSize, display, input, utility, player); break;
+                case false:
+                    (board, list) = bf.RandomPlacement(boardSize, player); break;
+            }
+            
             player.SetListOfShips(list);
             return board;
         }
