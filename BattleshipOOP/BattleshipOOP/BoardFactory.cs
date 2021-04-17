@@ -79,7 +79,6 @@ namespace BattleshipOOP
         {
             Board board = CreateBoard(size);
             List<Ship> ships = CreateListOfShips();
-            display.PrintMessage("Let's begin ships placement");
             foreach (Ship ship in ships)
             {  
                 int x1, y1, x2,y2;

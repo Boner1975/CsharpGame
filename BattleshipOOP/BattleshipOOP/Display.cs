@@ -8,7 +8,7 @@ namespace BattleshipOOP
     {
         public string spacingForOneDigitCols = "  ";
         public string spacingForTwoDigitsCols = " ";
-        string text = "board for ship placement";
+        string text = "Let's begin ships placement";
         
         public Display()
         {

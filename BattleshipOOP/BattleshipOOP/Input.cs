@@ -65,7 +65,7 @@ namespace BattleshipOOP
             var list = new List<int>();
             while (!isValidEntry)
             {
-                display.PrintMessageInLine("Provide coordinates to place a ship in a1/A1 format: ");
+                display.PrintMessageInLine("Provide coordinate in a1/A1 format: ");
                 location = Console.ReadLine();
                 if (location.Length == 2 && int.TryParse(location[1].ToString(), out _) && Char.IsLetter(location[0]))
                 {
