@@ -104,6 +104,7 @@ namespace BattleshipOOP
         {
             for (int i = x-1;i <= x + 1; i++) 
             {
+
                 if (i<0 || i >= size) 
                 {
                     continue;

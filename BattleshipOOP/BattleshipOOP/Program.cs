@@ -6,6 +6,8 @@ namespace BattleshipOOP
     {
         static void Main(string[] args)
         {
+            BoardFactory bf = new BoardFactory();
+            bf.ManualPlacement(10, new Display(), new Input(), new Utility(), new Player());
             /*
             Board board = new Board(10);
             Display display = new Display();

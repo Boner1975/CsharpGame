@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace BattleshipOOP
 {
@@ -55,8 +54,7 @@ namespace BattleshipOOP
                     }
                     if (counter > 1_000_000)
                         throw new Exception("There is a problem whith ships random placement after 1000000 tries");
-
-                } while (!board.PlaceShip(ship, x1,y1,x2,y2, player));
+                } while (!board.PlaceShip(ship, x1, y1, x2, y2, player));
             }
 
             return (board, ships);
@@ -77,10 +75,42 @@ namespace BattleshipOOP
             return y2;
         }
 
-        public void ManualPlacement(int size)
+        public void ManualPlacement(int size, Display display, Input input, Utility utility, Player player)
         {
             Board board = CreateBoard(size);
             List<Ship> ships = CreateListOfShips();
+            display.PrintMessage("Let's begin ships placement");
+            foreach (Ship ship in ships)
+            {  
+                int x1, y1, x2,y2;
+               
+                bool isCorrect;
+
+                display.DrawClearBoard(board, player, utility);
+                do
+                {
+                    if ((int)ship.Type == 1)
+                    {
+                        display.PrintShipsNameAndSize(ship);
+                        List<int> location = input.GetLocation(display, utility, board);
+                        x1 = location[0];
+                        y1 = location[1];
+                        x2 = location[0];
+                        y2 = location[1];
+                    }
+                    else
+                    {
+                        display.PrintShipsNameAndSize(ship);
+
+                        (x1, y1, x2, y2) = input.GetLocations(display, utility, board.size);
+                    }
+                    isCorrect = board.PlaceShip(ship, x1, y1, x2, y2, player);
+                    if (isCorrect == false)
+                    {
+                        display.PrintMessage("Incorrect input");
+                    }
+                } while (!isCorrect);
+            }
         }
     }
 }

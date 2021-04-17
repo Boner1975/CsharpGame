@@ -154,6 +154,16 @@ namespace BattleshipOOP
             PrintOptions(mM, optionIndex);
         }
 
+        public void PrintShipsNameAndSize(Ship ship)
+        {
+            if ((int)ship.Type == 1)
+            {
+                Console.WriteLine($"Set ship {ship.Type} of {(int)ship.Type} square size");
+            }
+            else
+                Console.WriteLine($"Set ship {ship.Type} of {(int)ship.Type} squares size");
+        }
+
         private void PrintOptions(MainMenu menu, int optionIndex)
         {
             for (int i = 0; i < menu.optionsList.Length; i++)
@@ -161,6 +171,7 @@ namespace BattleshipOOP
                 Console.Out.WriteLine(menu.ManageOptions(optionIndex, i));
             }
         }
+
 
 
     }

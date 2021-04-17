@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BattleshipOOP
 {
-    class Input
+    public class Input
     {
         string size = "";
 
@@ -93,6 +93,48 @@ namespace BattleshipOOP
                 }
             }
             return list;
+        }
+        public (int, int,int,int) GetLocations(Display display, Utility utility, int boardSize)
+        {
+            List<int> list1 = new List<int>();
+            List<int> list2 = new List<int>();
+
+            string[] table;
+            do
+            {
+                string location = Console.ReadLine();
+                table = location.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+                if (table.Length != 2)
+                {
+                    display.PrintMessage("Wrong format, try again.");
+                    continue;
+                }
+
+            } while (table.Length != 2 || (!CheckLocation(table[0], ref list1, utility, display, boardSize) || !CheckLocation(table[1], ref list2, utility, display, boardSize)));
+
+            return (list1[0], list1[1], list2[0], list2[1]);
+        }
+        private bool CheckLocation(string location, ref List<int> list, Utility utility, Display display, int boardSize)
+        {
+
+            if (Char.IsLetter(location[0]) && 
+                ((location.Length == 2 && int.TryParse(location[1].ToString(), out _)) || 
+                 (location.Length == 3 && int.TryParse((location[1].ToString() + location[2].ToString()), out _))))
+            {
+                list = utility.StringToIntTransformation(location);
+                if (list[0] > boardSize - 1 || list[1] > boardSize - 1)
+                {
+                    display.PrintMessage("Location out of range");
+                    return false;
+                }
+            }
+            else
+            {
+                display.PrintMessage("Wrong format, try again.");
+                return false;
+            }
+
+            return true;
         }
 
         public bool ManageMenuInput(int menuChoice)
