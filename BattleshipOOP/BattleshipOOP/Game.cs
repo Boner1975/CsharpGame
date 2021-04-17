@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace BattleshipOOP
@@ -26,7 +27,6 @@ namespace BattleshipOOP
             ChooseMode();
             this.BoardSize = input.GetBoardSize(display);
             DefinePlayers();
-            DefineBoards();
 
             do
             {
@@ -39,15 +39,9 @@ namespace BattleshipOOP
 
         private void ChooseMode()
         {
-            MainMenu menu = new MainMenu();
-            int optionIndex = menu.RunMenu("mode");
-            PlayersAreHumans = input.ManageModeInput(optionIndex);
-        }
-
-        private void DefineBoards()
-        {
-            Board2 = DefineBoardsAndSetShips(BoardSize, Player1);
-            Board1 = DefineBoardsAndSetShips(BoardSize, Player2);
+            ModeMenu modeMenu = new ModeMenu();
+            //int optionIndex = menu.RunMenu(modeMenu);
+            PlayersAreHumans = modeMenu.RunMenu();
         }
 
         private Board DefineBoardsAndSetShips(int boardSize, Player player)
@@ -58,7 +52,13 @@ namespace BattleshipOOP
             switch (player.GetIsHuman())
             {
                 case true:
-                    (board, list) = bf.ManualPlacement(boardSize, display, input, utility, player); break;
+                    YesNoMenu menu = new YesNoMenu();
+                    bool manualShipPlacement = menu.RunMenu();
+                    menu.ResetSelectedOptionIndex();
+                    (board, list) = manualShipPlacement 
+                        ? bf.ManualPlacement(boardSize, display, input, utility, player)
+                        : bf.RandomPlacement(boardSize, player);
+                    break;
                 case false:
                     (board, list) = bf.RandomPlacement(boardSize, player); break;
             }
@@ -73,7 +73,20 @@ namespace BattleshipOOP
             bool player2IsHuman = PlayersAreHumans[1];
             
             Player1 = new Player(player1IsHuman ? input.GetPlayerName(display) : "Player1", player1IsHuman);
+            Board2 = DefineBoardsAndSetShips(BoardSize, Player1);
+            Console.Clear();
+            display.DrawClearBoard(Board2, Player1, utility);
+            display.PrintMessage("Press any key to precede to another player's board");
+            Console.ReadKey();
+
+            Console.Clear();
             Player2 = new Player(player2IsHuman ? input.GetPlayerName(display) : "Player2", player2IsHuman);
+            Board1 = DefineBoardsAndSetShips(BoardSize, Player2);
+            Console.Clear();
+            display.DrawClearBoard(Board1, Player2, utility);
+            display.PrintMessage("Press any key to precede start the game");
+            Console.ReadKey();
+            
             CurrentPlayer = Player2;
         }
 

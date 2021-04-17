@@ -144,19 +144,6 @@ namespace BattleshipOOP
             Console.WriteLine(message);
         }
 
-        public void PrintMainMenu(int optionIndex, string menuType)
-        {
-            MainMenu mM = new MainMenu();
-            Console.Clear();
-            bool isMainMenu = menuType == "mainMenu";
-
-            if (isMainMenu)
-                Console.Out.WriteLine(mM.gameLogo);
-
-            Console.Out.WriteLine(isMainMenu ? mM.mainMenu : mM.modeSelectionText);
-            PrintOptions(mM, optionIndex, (isMainMenu ? mM.MenuOptionsList : mM.ModeOptionsList));
-        }
-
         public void PrintShipsNameAndSize(Ship ship)
         {
             if ((int)ship.Type == 1)
@@ -165,14 +152,6 @@ namespace BattleshipOOP
             }
             else
                 Console.WriteLine($"Set ship {ship.Type} of {(int)ship.Type} squares size");
-        }
-
-        private void PrintOptions(MainMenu menu, int optionIndex, string[] optionsList)
-        {
-            for (int i = 0; i < optionsList.Length; i++)
-            {
-                Console.Out.WriteLine(menu.ManageOptions(optionIndex, optionsList,  i));
-            }
         }
 
 
