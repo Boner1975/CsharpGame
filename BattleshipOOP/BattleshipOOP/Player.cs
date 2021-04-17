@@ -34,7 +34,26 @@ namespace BattleshipOOP
 
         private void CheckPlayerStatus()
         {
-            this.IsAlive = !(list is null) ? list.Count > 0 : false;
+            Display display = new Display();
+            bool stillAlive = list is null;
+            int shipIndex = 0;
+            int shipsNum = list.Count;
+
+            while (!stillAlive && shipIndex < shipsNum)
+            {
+                foreach (Square square in list[shipIndex].GetLocation())
+                {
+                    if (square.SquareStatus == SquareStatus.Ship)
+                    {
+                        stillAlive = true;
+                    }
+                }
+                
+                shipIndex++;
+            }
+
+            this.IsAlive = stillAlive;
+            
         }
         
         public bool GetIsHuman()
@@ -52,14 +71,14 @@ namespace BattleshipOOP
             this.list.Add(ship);
         }
 
-        public void CheckShot(Square square)
+        public void CheckShot(Square square, Player opponent)
         {
             bool squareInList = false;
             int shipIndex = 0;
 
-            while (!(list is null) && !squareInList && shipIndex < list.Count)
+            while (!(opponent.list is null) && !squareInList && shipIndex < opponent.list.Count)
             {
-                squareInList = SuccessfullHit(list[shipIndex], square);
+                squareInList = SuccessfullHit(opponent.list[shipIndex], square);
 
                 if (!squareInList)
                 {
@@ -68,8 +87,6 @@ namespace BattleshipOOP
                 
                 shipIndex++;
             }
-
-            Console.ReadKey();
         }
         
         private bool SuccessfullHit(Ship ship, Square square)
