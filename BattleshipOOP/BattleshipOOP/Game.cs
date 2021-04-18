@@ -99,6 +99,8 @@ namespace BattleshipOOP
         {
             Board board = CurrentPlayer.Equals(Player1) ? Board1 : Board2;
             display.DrawGameBoards(Board1, Board2, Player1, Player2, utility);
+            display.PrintMessage($"{CurrentPlayer.Name}");
+
             Square selectedSquare = GetSquareByCoordinates(input.GetLocation(display,utility,board), board);
             CurrentPlayer.CheckShot(selectedSquare, Opponent);
             CheckWin();
