@@ -7,6 +7,9 @@ namespace BattleshipOOP
     {
         static void Main(string[] args)
         {
+            Battleship bs = new Battleship();
+            bs.StartApp();
+
             //BoardFactory bf = new BoardFactory();
             //bf.ManualPlacement(10, new Display(), new Input(), new Utility(), new Player());
             /*
@@ -28,8 +31,8 @@ namespace BattleshipOOP
             */
 
             //Input input = new Input();
-            Game game = new Game();
-            game.RunGame();
+            //Game game = new Game();
+            //game.RunGame();
         }
     }
 }
