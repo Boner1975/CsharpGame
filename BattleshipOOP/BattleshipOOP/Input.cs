@@ -95,6 +95,25 @@ namespace BattleshipOOP
             }
             return list;
         }
+
+        public int AskAboutComputerLevel(Display display, Input input)
+        {
+            display.PrintMessage("CHOOSE LEVEL OF DIFFICULTY: \n" +
+                "1. EASY \n" +
+                "2. NORMAL \n" +
+                "3. HARD \n");
+            int level ;
+            string levelInput = Console.ReadLine();
+            bool isNumber = int.TryParse(levelInput, out level);
+            while (isNumber != true || (level <1 && level >3))
+            {
+                display.PrintMessage("Incorrect input");
+                levelInput = Console.ReadLine();
+                isNumber = int.TryParse(levelInput, out level);
+            }
+            return level;
+        }
+
         public (int, int,int,int) GetLocations(Display display, Utility utility, int boardSize)
         {
             List<int> list1 = new List<int>();

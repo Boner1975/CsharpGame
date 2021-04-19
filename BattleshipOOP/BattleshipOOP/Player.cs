@@ -15,7 +15,7 @@ namespace BattleshipOOP
             this.list.Add(ship);
         }
 
-        public void CheckShot(Square square, Player opponent)
+        public bool CheckShot(Square square, Player opponent)
         {
             bool squareInList = false;
             int shipIndex = 0;
@@ -31,6 +31,8 @@ namespace BattleshipOOP
 
                 shipIndex++;
             }
+
+            return squareInList;
         }
 
         public abstract Square DoMove(Display display, Input input, Utility utility, Board board);
