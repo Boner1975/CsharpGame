@@ -94,8 +94,18 @@ namespace BattleshipOOP
         {
             string name = isHuman ? input.GetPlayerName(display) : defaultName;
             if (isHuman) return new HumanPlayer(name);
-            int level = input.AskAboutComputerLevel(display, input);
-            return new ComputerPlayer(name);
+            LevelMenu levelMenu = new LevelMenu();
+            switch (levelMenu.RunMenu())
+            {
+                case 1:
+                    new ComputerPlayerEasy(name);
+                    break;
+                default:
+                    break;
+
+
+            }
+            return new ComputerPlayerEasy(name);
         }
 
         private Player SwitchPlayers()
@@ -113,6 +123,7 @@ namespace BattleshipOOP
                 display.DrawGameBoards(Board1, Board2, Player1, Player2, utility);
                 display.PrintMessage($"{CurrentPlayer.Name}");
                 Square selectedSquare = CurrentPlayer.DoMove(display, input, utility, board);
+                System.Threading.Thread.Sleep(1000);
                 successfullShot = (CurrentPlayer.CheckShot(selectedSquare, Opponent));
                 CheckWin();   
             } while (successfullShot);
