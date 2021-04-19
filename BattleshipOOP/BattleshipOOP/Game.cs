@@ -80,7 +80,7 @@ namespace BattleshipOOP
             Console.ReadKey();
 
             Console.Clear();
-            Player2 = CreatePlayer(player1IsHuman, "Player2");
+            Player2 = CreatePlayer(player2IsHuman, "Player2");
             Board1 = DefineBoardsAndSetShips(BoardSize, Player2);
             Console.Clear();
             display.DrawClearBoard(Board1, Player2, utility);
@@ -94,7 +94,7 @@ namespace BattleshipOOP
         {
             string name = isHuman ? input.GetPlayerName(display) : defaultName;
             if (isHuman) return new HumanPlayer(name);
-
+            int level = input.AskAboutComputerLevel(display, input);
             return new ComputerPlayer(name);
         }
 
