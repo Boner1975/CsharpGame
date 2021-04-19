@@ -96,7 +96,7 @@ namespace BattleshipOOP
             return list;
         }
 
-        public int AskAboutComputerLevel(Display display, Input input)
+/*        public int AskAboutComputerLevel(Display display, Input input)
         {
             display.PrintMessage("CHOOSE LEVEL OF DIFFICULTY: \n" +
                 "1. EASY \n" +
@@ -112,7 +112,7 @@ namespace BattleshipOOP
                 isNumber = int.TryParse(levelInput, out level);
             }
             return level;
-        }
+        }*/
 
         public (int, int,int,int) GetLocations(Display display, Utility utility, int boardSize)
         {

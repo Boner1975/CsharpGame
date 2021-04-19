@@ -4,10 +4,10 @@ using System.Text;
 
 namespace BattleshipOOP
 {
-    public class ComputerPlayer : Player
+    public class ComputerPlayerEasy : Player
     {
 
-        public ComputerPlayer(string name = "Computer")
+        public ComputerPlayerEasy(string name = "Computer")
         {
             Name = name;
             IsHuman = false;
@@ -23,7 +23,7 @@ namespace BattleshipOOP
                 x = rand.Next(0, board.size);
                 y = rand.Next(0, board.size);
                 selectedSquare = GetSquareByCoordinates(new List<int> { x, y }, board);
-            }while(selectedSquare.SquareStatus!=SquareStatus.Empty || selectedSquare.SquareStatus!=SquareStatus.Ship);
+            }while(selectedSquare.SquareStatus!=SquareStatus.Empty && selectedSquare.SquareStatus!=SquareStatus.Ship);
             return selectedSquare;
 
         }
