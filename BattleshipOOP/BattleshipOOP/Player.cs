@@ -4,68 +4,12 @@ using System.Text;
 
 namespace BattleshipOOP
 {
-    public class Player
+    public abstract class Player
     {
-        private string name;
-        public string Name 
-        { 
-            get
-            {
-                return name;
-            }
-        }
-        private List<Ship> list;
-        private bool IsAlive;
-        private bool IsHuman;
-
-        public Player(string name = "", bool isHuman = true)
-        {
-            this.name = name;
-            this.IsAlive = true;
-            this.IsHuman = isHuman;
-            this.list = new List<Ship>();
-        }
-
-        public bool GetIsAlive()
-        {
-            CheckPlayerStatus();
-            return this.IsAlive;
-        }
-
-        private void CheckPlayerStatus()
-        {
-            Display display = new Display();
-            bool stillAlive = list is null;
-            int shipIndex = 0;
-            int shipsNum = list.Count;
-
-            while (!stillAlive && shipIndex < shipsNum)
-            {
-                foreach (Square square in list[shipIndex].GetLocation())
-                {
-                    if (square.SquareStatus == SquareStatus.Ship)
-                    {
-                        stillAlive = true;
-                    }
-                }
-                
-                shipIndex++;
-            }
-
-            this.IsAlive = stillAlive;
-            
-        }
-        
-        public bool GetIsHuman()
-        {
-            return this.IsHuman;
-        }
-
-        public void SetListOfShips(List<Ship> list)
-        {
-            this.list = list;
-        }
-
+        protected List<Ship> list;
+        public bool IsAlive { get { return CheckPlayerStatus(); } }
+        public bool IsHuman { get; protected set; }
+        public string Name { get; protected set; }
         public void AddShipToList(Ship ship)
         {
             this.list.Add(ship);
@@ -84,28 +28,32 @@ namespace BattleshipOOP
                 {
                     square.SquareStatus = SquareStatus.Missed;
                 }
-                
+
                 shipIndex++;
             }
         }
-        
-        private bool SuccessfullHit(Ship ship, Square square)
+
+        public abstract Square DoMove(Display display, Input input, Utility utility, Board board);
+       
+        public void SetListOfShips(List<Ship> list)
         {
-            if (ship.GetLocation().Contains(square))
+            this.list = list;
+        }
+
+        protected Square GetSquareByCoordinates(List<int> coordinates, Board board)
+        {
+            int colIndex = 0;
+            int rowIndex = 1;
+
+            foreach (Square square in board.ocean)
             {
-                square.SquareStatus = SquareStatus.Hit;
-                DidItSunk(ship);
-                return true;
+                if (square.x == coordinates[colIndex] && square.y == coordinates[rowIndex])
+                {
+                    return square;
+                }
             }
 
-            return false;
-        }
-        
-        private void DidItSunk(Ship ship)
-        {
-            if (AllSquaresHit(ship))
-                SunkTheShip(ship);
-
+            return null;
         }
 
         private bool AllSquaresHit(Ship ship)
@@ -119,6 +67,47 @@ namespace BattleshipOOP
             return true;
         }
 
+        private bool CheckPlayerStatus()
+        {
+            bool stillAlive = list is null;
+            int shipIndex = 0;
+            int shipsNum = list.Count;
+
+            while (!stillAlive && shipIndex < shipsNum)
+            {
+                foreach (Square square in list[shipIndex].GetLocation())
+                {
+                    if (square.SquareStatus == SquareStatus.Ship)
+                    {
+                        stillAlive = true;
+                    }
+                }
+
+                shipIndex++;
+            }
+
+            return stillAlive;
+
+        }
+        
+        private void DidItSunk(Ship ship)
+        {
+            if (AllSquaresHit(ship))
+                SunkTheShip(ship);
+        }
+ 
+        private bool SuccessfullHit(Ship ship, Square square)
+        {
+            if (ship.GetLocation().Contains(square))
+            {
+                square.SquareStatus = SquareStatus.Hit;
+                DidItSunk(ship);
+                return true;
+            }
+
+            return false;
+        }
+        
         private void SunkTheShip(Ship ship)
         {
             foreach (Square square in ship.GetLocation())

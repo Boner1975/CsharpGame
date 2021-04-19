@@ -7,6 +7,7 @@ namespace BattleshipOOP
     {
         static void Main(string[] args)
         {
+            Console.ForegroundColor = ConsoleColor.Blue;
             Battleship bs = new Battleship();
             bs.StartApp();
 

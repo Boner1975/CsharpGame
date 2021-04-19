@@ -33,7 +33,7 @@ namespace BattleshipOOP
                 CurrentPlayer = SwitchPlayers();
                 Opponent = SwitchPlayers();
                 Round();
-            } while (Opponent.GetIsAlive());
+            } while (Opponent.IsAlive);
         }
 
 
@@ -49,7 +49,7 @@ namespace BattleshipOOP
             Board board;
             List<Ship> list;
 
-            switch (player.GetIsHuman())
+            switch (player.IsHuman)
             {
                 case true:
                     YesNoMenu menu = new YesNoMenu();
@@ -71,8 +71,8 @@ namespace BattleshipOOP
         {
             bool player1IsHuman = PlayersAreHumans[0];
             bool player2IsHuman = PlayersAreHumans[1];
-            
-            Player1 = new Player(player1IsHuman ? input.GetPlayerName(display) : "Player1", player1IsHuman);
+
+            Player1 = CreatePlayer(player1IsHuman, "Player1");
             Board2 = DefineBoardsAndSetShips(BoardSize, Player1);
             Console.Clear();
             display.DrawClearBoard(Board2, Player1, utility);
@@ -80,7 +80,7 @@ namespace BattleshipOOP
             Console.ReadKey();
 
             Console.Clear();
-            Player2 = new Player(player2IsHuman ? input.GetPlayerName(display) : "Player2", player2IsHuman);
+            Player2 = CreatePlayer(player1IsHuman, "Player2");
             Board1 = DefineBoardsAndSetShips(BoardSize, Player2);
             Console.Clear();
             display.DrawClearBoard(Board1, Player2, utility);
@@ -88,6 +88,14 @@ namespace BattleshipOOP
             Console.ReadKey();
             
             CurrentPlayer = Player2;
+        }
+
+        private Player CreatePlayer(bool isHuman, string defaultName)
+        {
+            string name = isHuman ? input.GetPlayerName(display) : defaultName;
+            if (isHuman) return new HumanPlayer(name);
+
+            return new ComputerPlayer(name);
         }
 
         private Player SwitchPlayers()
@@ -101,31 +109,16 @@ namespace BattleshipOOP
             display.DrawGameBoards(Board1, Board2, Player1, Player2, utility);
             display.PrintMessage($"{CurrentPlayer.Name}");
 
-            Square selectedSquare = GetSquareByCoordinates(input.GetLocation(display,utility,board), board);
+            Square selectedSquare = CurrentPlayer.DoMove(display, input, utility, board);
             CurrentPlayer.CheckShot(selectedSquare, Opponent);
             CheckWin();
         }
 
-        private Square GetSquareByCoordinates(List<int> coordinates, Board board)
-        {
-            int colIndex = 0;
-            int rowIndex = 1;
-
-            foreach (Square square in board.ocean)
-            {
-                if (square.x == coordinates[colIndex] && square.y == coordinates[rowIndex])
-                {
-                    return square;
-                }
-            }
-
-            return null;
-
-        }
+        
 
         private void CheckWin()
         {
-            if (!Opponent.GetIsAlive())
+            if (!Opponent.IsAlive)
             {
                 display.PrintMessage($"Player {(CurrentPlayer.Name)} win! Congratulations!!!");
             }
