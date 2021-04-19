@@ -105,13 +105,17 @@ namespace BattleshipOOP
 
         private void Round()
         {
+            bool successfullShot;
             Board board = CurrentPlayer.Equals(Player1) ? Board1 : Board2;
-            display.DrawGameBoards(Board1, Board2, Player1, Player2, utility);
-            display.PrintMessage($"{CurrentPlayer.Name}");
-
-            Square selectedSquare = CurrentPlayer.DoMove(display, input, utility, board);
-            CurrentPlayer.CheckShot(selectedSquare, Opponent);
-            CheckWin();
+            
+            do
+            {
+                display.DrawGameBoards(Board1, Board2, Player1, Player2, utility);
+                display.PrintMessage($"{CurrentPlayer.Name}");
+                Square selectedSquare = CurrentPlayer.DoMove(display, input, utility, board);
+                successfullShot = (CurrentPlayer.CheckShot(selectedSquare, Opponent));
+                CheckWin();   
+            } while (successfullShot);
         }
 
         
