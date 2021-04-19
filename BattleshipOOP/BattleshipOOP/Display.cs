@@ -121,12 +121,32 @@ namespace BattleshipOOP
                     Console.Write($"    {(char)(i / 2 + 65)}  |");
                     for (int j = 0; j < board1.size; j++)
                     {
-                        Console.Write($" {board2.ocean[i/2, j].GetCharacter()} |");
+                        Console.Write($" {board2.ocean[i / 2, j].GetCharacter()} |");
+                        /*
+                        if (board2.ocean[i / 2, j].GetCharacter().ToString() != "S")
+                        {
+                            Console.Write($" {board2.ocean[i / 2, j].GetCharacter()} |");
+                        }
+                        else
+                        {
+                            Console.Write(" ~ |");
+                        }
+                        */
                     }
                     Console.Write($"    {(char)(i / 2 + 65)}  |");
                     for (int j = 0; j < board1.size; j++)
                     {
                         Console.Write($" {board1.ocean[i / 2, j].GetCharacter()} |");
+                        /*
+                        if (board1.ocean[i / 2, j].GetCharacter().ToString() != "S")
+                        {
+                            Console.Write($" {board1.ocean[i / 2, j].GetCharacter()} |");
+                        }
+                        else
+                        {
+                            Console.Write(" ~ |");
+                        }
+                        */
                     }
                 }
             }
