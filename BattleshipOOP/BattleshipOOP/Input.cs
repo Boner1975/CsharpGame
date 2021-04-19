@@ -6,45 +6,45 @@ namespace BattleshipOOP
 {
     public class Input
     {
-        string size = "";
+        string userInput = "";
+        public bool isQuit = false;
         private Display display = new Display();
 
         //Board size
         public int GetBoardSize(Display display)
         {
             bool isValidSize = false;
-            ;
             while (!isValidSize)
             {
                 display.PrintMessageInLine("Please choose board size from 10 to 20: ");
-                size = Console.ReadLine();
-                bool successfullyParsed = int.TryParse(size, out _);
+                userInput = Console.ReadLine();
+                bool successfullyParsed = int.TryParse(userInput, out _);
                 if (!successfullyParsed)
                 {
-                    display.PrintMessage($"\"{size}\" is not a digit");
+                    display.PrintMessage($"\"{userInput}\" is not a digit");
                 }
-                else if(successfullyParsed && (int.Parse(size) < 10 || int.Parse(size) > 20))
+                else if (successfullyParsed && (int.Parse(userInput) < 10 || int.Parse(userInput) > 20))
                 {
-                    display.PrintMessage($"\"{size}\" is outside of range");
+                    display.PrintMessage($"\"{userInput}\" is outside of range");
                 }
                 else
                 {
                     isValidSize = !isValidSize;
                 }
             }
-            return int.Parse(size);
+            return int.Parse(userInput);
         }
 
         //Player names
         public string GetPlayerName(Display display)
         {
             bool isValidName = false;
-            string name = "";
+            //string name = "";
             while (!isValidName)
             {
                 display.PrintMessage("Please provide your nickname: ");
-                name = Console.ReadLine();
-                if (name.Length == 0)
+                userInput = Console.ReadLine();
+                if (userInput.Length == 0)
                 {
                     display.PrintMessage("Please provide at least one character.");
                 }
@@ -53,7 +53,7 @@ namespace BattleshipOOP
                     isValidName = !isValidName;
                 }
             }
-            return name;
+            return userInput;
         }
 
         //Ship type
@@ -62,15 +62,15 @@ namespace BattleshipOOP
         public List<int> GetLocation(Display display, Utility utility, Board board)
         {
             bool isValidEntry = false;
-            string location;
+            //string location;
             var list = new List<int>();
             while (!isValidEntry)
             {
                 display.PrintMessageInLine("Provide coordinate in a1/A1 format: ");
-                location = Console.ReadLine();
-                if (location.Length == 2 && int.TryParse(location[1].ToString(), out _) && Char.IsLetter(location[0]))
+                userInput = Console.ReadLine();
+                if (userInput.Length == 2 && int.TryParse(userInput[1].ToString(), out _) && Char.IsLetter(userInput[0]))
                 {
-                    list = utility.StringToIntTransformation(location);
+                    list = utility.StringToIntTransformation(userInput);
                     if (list[0] > (int.Parse(board.size.ToString())) - 1 || list[1] > (int.Parse(board.size.ToString())) - 1)
                     {
                         display.PrintMessage("Location out of range");
@@ -78,9 +78,9 @@ namespace BattleshipOOP
                     }
                     isValidEntry = true;
                 }
-                else if (location.Length == 3 && int.TryParse((location[1].ToString() + location[2].ToString()), out _) && Char.IsLetter(location[0]))
+                else if (userInput.Length == 3 && int.TryParse((userInput[1].ToString() + userInput[2].ToString()), out _) && Char.IsLetter(userInput[0]))
                 {
-                    list = utility.StringToIntTransformation(location);
+                    list = utility.StringToIntTransformation(userInput);
                     if (list[0] > (int.Parse(board.size.ToString())) - 1 || list[1] > (int.Parse(board.size.ToString())) - 1)
                     {
                         display.PrintMessage("Location out of range");
@@ -103,8 +103,10 @@ namespace BattleshipOOP
             string[] table;
             do
             {
-                string location = Console.ReadLine();
-                table = location.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+                //string location = Console.ReadLine();
+                userInput = Console.ReadLine();
+
+                table = userInput.Split(" ", StringSplitOptions.RemoveEmptyEntries);
                 if (table.Length != 2)
                 {
                     display.PrintMessage("Wrong format, try again.");
@@ -137,7 +139,6 @@ namespace BattleshipOOP
 
             return true;
         }
-
         //Ship location on fireing
     }
 }
