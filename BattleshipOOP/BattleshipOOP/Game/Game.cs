@@ -14,18 +14,21 @@ namespace BattleshipOOP
         private Player Player2;
         private Player CurrentPlayer;
         private Player Opponent;
-        private bool[] PlayersAreHumans;
+        private int GameLevel;
+        private List<bool> PlayersAreHumans;
         private BoardFactory bf = new BoardFactory();
         private Input input = new Input();
         private Display display = new Display();
         private Utility utility = new Utility();
-        
 
 
-        public void RunGame()
+
+        public void RunGame(List<bool> playersMode, int gameLevel)
         {
-            ChooseMode();
+            //ChooseMode();
             this.BoardSize = input.GetBoardSize(display);
+            this.PlayersAreHumans = playersMode;
+            this.GameLevel = gameLevel;
             DefinePlayers();
 
             do
@@ -36,13 +39,14 @@ namespace BattleshipOOP
             } while (Opponent.IsAlive);
         }
 
-
+        /*
         private void ChooseMode()
         {
             ModeMenu modeMenu = new ModeMenu();
             //int optionIndex = menu.RunMenu(modeMenu);
             PlayersAreHumans = modeMenu.RunMenu();
         }
+        */
 
         private Board DefineBoardsAndSetShips(int boardSize, Player player)
         {
@@ -54,7 +58,7 @@ namespace BattleshipOOP
                 case true:
                     YesNoMenu menu = new YesNoMenu();
                     bool manualShipPlacement = menu.RunMenu();
-                    menu.ResetSelectedOptionIndex();
+                    menu.ResetArrowIndex();
                     (board, list) = manualShipPlacement 
                         ? bf.ManualPlacement(boardSize, display, input, utility, player)
                         : bf.RandomPlacement(boardSize, player);
@@ -94,8 +98,9 @@ namespace BattleshipOOP
         {
             string name = isHuman ? input.GetPlayerName(display) : defaultName;
             if (isHuman) return new HumanPlayer(name);
-            LevelMenu levelMenu = new LevelMenu();
-            switch (levelMenu.RunMenu())
+            //LevelMenu levelMenu = new LevelMenu();
+            //switch (levelMenu.RunMenu())
+            switch (GameLevel)
             {
                 case 1:
                     new ComputerPlayerEasy(name);
@@ -117,16 +122,19 @@ namespace BattleshipOOP
         {
             bool successfullShot;
             Board board = CurrentPlayer.Equals(Player1) ? Board1 : Board2;
+            display.DrawGameBoards(Board1, Board2, Player1, Player2, utility);
             
             do
             {
-                display.DrawGameBoards(Board1, Board2, Player1, Player2, utility);
                 display.PrintMessage($"{CurrentPlayer.Name}");
                 Square selectedSquare = CurrentPlayer.DoMove(display, input, utility, board);
                 System.Threading.Thread.Sleep(1000);
                 successfullShot = (CurrentPlayer.CheckShot(selectedSquare, Opponent));
+                display.DrawGameBoards(Board1, Board2, Player1, Player2, utility);
                 CheckWin();   
-            } while (successfullShot);
+            } while (successfullShot && Opponent.IsAlive);
+
+            Console.ReadKey();
         }
 
         

@@ -18,7 +18,7 @@ namespace BattleshipOOP
             do
             {
                 finishGame = mainMenu.RunMenu();
-                mainMenu.ResetSelectedOptionIndex();
+                mainMenu.ResetArrowIndex();
                 
             } while (!finishGame);
         }
