@@ -19,6 +19,7 @@ namespace BattleshipOOP
         private Input input = new Input();
         private Display display = new Display();
         private Utility utility = new Utility();
+        private bool isQuit;
         
 
 
@@ -33,7 +34,7 @@ namespace BattleshipOOP
                 CurrentPlayer = SwitchPlayers();
                 Opponent = SwitchPlayers();
                 Round();
-            } while (Opponent.IsAlive);
+            } while (Opponent.IsAlive && !isQuit);
         }
 
 
@@ -123,6 +124,11 @@ namespace BattleshipOOP
                 display.DrawGameBoards(Board1, Board2, Player1, Player2, utility);
                 display.PrintMessage($"{CurrentPlayer.Name}");
                 Square selectedSquare = CurrentPlayer.DoMove(display, input, utility, board);
+                if (selectedSquare.x == -1)
+                {
+                    isQuit = true;
+                    break;
+                }
                 System.Threading.Thread.Sleep(1000);
                 successfullShot = (CurrentPlayer.CheckShot(selectedSquare, Opponent));
                 CheckWin();   
