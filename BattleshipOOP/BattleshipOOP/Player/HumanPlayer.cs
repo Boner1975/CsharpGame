@@ -15,8 +15,17 @@ namespace BattleshipOOP
 
         public override Square DoMove(Display display, Input input, Utility utility, Board board)
         {
-            Square selectedSquare = GetSquareByCoordinates(input.GetLocation(display, utility, board), board);
-            return selectedSquare;
+            List<int> list = input.GetLocation(display, utility, board);
+            if (list.Count != 0)
+            {
+                Square selectedSquare = GetSquareByCoordinates(list, board);
+                return selectedSquare;
+            }
+            else
+            {
+                Square qsquare = new Square(-1, -1);
+                return qsquare;
+            }
         }
     }
 }

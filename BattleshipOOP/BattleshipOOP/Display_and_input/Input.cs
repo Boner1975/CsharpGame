@@ -68,6 +68,8 @@ namespace BattleshipOOP
             {
                 display.PrintMessageInLine("Provide coordinate in a1/A1 format: ");
                 userInput = Console.ReadLine();
+                if (userInput.ToString().ToUpper() == "Q")
+                { break; }
                 if (userInput.Length == 2 && int.TryParse(userInput[1].ToString(), out _) && Char.IsLetter(userInput[0]))
                 {
                     list = utility.StringToIntTransformation(userInput);
@@ -158,6 +160,14 @@ namespace BattleshipOOP
 
             return true;
         }
+
+        public void IsbackToMenu()
+        {
+            if (userInput.ToString().ToUpper() == "Q")
+            { isQuit = true; }
+            else { isQuit = false; }
+        }
+
         //Ship location on fireing
     }
 }

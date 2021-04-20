@@ -25,7 +25,6 @@ namespace BattleshipOOP
 
         public void RunGame(List<bool> playersMode, int gameLevel)
         {
-            //ChooseMode();
             this.BoardSize = input.GetBoardSize(display);
             this.PlayersAreHumans = playersMode;
             this.GameLevel = gameLevel;
@@ -38,15 +37,6 @@ namespace BattleshipOOP
                 Round();
             } while (Opponent.IsAlive);
         }
-
-        /*
-        private void ChooseMode()
-        {
-            ModeMenu modeMenu = new ModeMenu();
-            //int optionIndex = menu.RunMenu(modeMenu);
-            PlayersAreHumans = modeMenu.RunMenu();
-        }
-        */
 
         private Board DefineBoardsAndSetShips(int boardSize, Player player)
         {
@@ -98,8 +88,6 @@ namespace BattleshipOOP
         {
             string name = isHuman ? input.GetPlayerName(display) : defaultName;
             if (isHuman) return new HumanPlayer(name);
-            //LevelMenu levelMenu = new LevelMenu();
-            //switch (levelMenu.RunMenu())
             switch (GameLevel)
             {
                 case 1:
