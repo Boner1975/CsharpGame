@@ -15,6 +15,12 @@ namespace BattleshipOOP
         }
         public override Square DoMove(Display display, Input input, Utility utility, Board board)
         {
+            ConsoleKey consoleKey = Console.ReadKey().Key;
+            if (consoleKey == ConsoleKey.Q)
+            {
+                Square qsquare = new Square(-1, -1);
+                return qsquare;
+            }
             Square selectedSquare = new Square(0,0);
             do
             {

@@ -128,7 +128,7 @@ namespace BattleshipOOP
                 CheckWin();   
             } while (successfullShot && Opponent.IsAlive);
 
-            Console.ReadKey();
+            //Console.ReadKey();
         }
 
         
