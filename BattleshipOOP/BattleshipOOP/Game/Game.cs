@@ -92,14 +92,12 @@ namespace BattleshipOOP
             switch (GameLevel)
             {
                 case 1:
-                    new ComputerPlayerEasy(name);
-                    break;
+                    return new ComputerPlayerEasy(name);
+                case 2:
+                    return new ComputerPlayerNormal(name);
                 default:
-                    break;
-
-
-            }
-            return new ComputerPlayerEasy(name);
+                    return new ComputerPlayerEasy(name);
+            }            
         }
 
         private Player SwitchPlayers()
