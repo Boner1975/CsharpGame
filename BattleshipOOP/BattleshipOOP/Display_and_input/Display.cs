@@ -152,8 +152,10 @@ namespace BattleshipOOP
                 else if (board.ocean[i / 2, j].GetCharacter().ToString() == "☠")
                 {
                     Console.BackgroundColor = ConsoleColor.Red;
+                    Console.ForegroundColor = ConsoleColor.Black;
                     Console.Write($" {board.ocean[i / 2, j].GetCharacter()} ");
-                    Console.BackgroundColor = ConsoleColor.Black;
+                    Console.ResetColor();
+                    Console.ForegroundColor = ConsoleColor.Blue;
                     Console.Write("|");
                 }
                 else if (board.ocean[i / 2, j].GetCharacter().ToString() == "M")

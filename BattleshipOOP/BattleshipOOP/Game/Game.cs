@@ -21,6 +21,7 @@ namespace BattleshipOOP
         private Display display = new Display();
         private Utility utility = new Utility();
         private bool isQuit;
+        private bool isWin;
 
 
 
@@ -36,7 +37,7 @@ namespace BattleshipOOP
                 CurrentPlayer = SwitchPlayers();
                 Opponent = SwitchPlayers();
                 Round();
-            } while (Opponent.IsAlive && !isQuit);
+            } while (Opponent.IsAlive && !isQuit && !isWin);
         }
 
         private Board DefineBoardsAndSetShips(int boardSize, Player player)
@@ -123,8 +124,8 @@ namespace BattleshipOOP
                 System.Threading.Thread.Sleep(1000);
                 successfullShot = (CurrentPlayer.CheckShot(selectedSquare, Opponent));
                 display.DrawGameBoards(Board1, Board2, Player1, Player2, utility);
-                CheckWin();   
-            } while (successfullShot && Opponent.IsAlive);
+                CheckWin();
+            } while (successfullShot && !isWin);
 
             //Console.ReadKey();
         }
@@ -136,6 +137,12 @@ namespace BattleshipOOP
             if (!Opponent.IsAlive)
             {
                 display.PrintMessage($"Player {(CurrentPlayer.Name)} win! Congratulations!!!");
+                isWin = true;
+                Console.ReadKey();
+            }
+            else
+            {
+                isWin = false;
             }
         }
     }
