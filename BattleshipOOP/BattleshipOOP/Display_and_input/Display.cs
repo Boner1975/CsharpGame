@@ -70,7 +70,17 @@ namespace BattleshipOOP
                 Console.Write("    " + (char)(i + 65) + "  |");
                 for (int j = 0; j < board.size; j++)
                 {
-                    Console.Write($" {board.ocean[i, j].GetCharacter()} |");
+                    if (board.ocean[i, j].GetCharacter().ToString() == "S")
+                    {
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.Write($" {board.ocean[i, j].GetCharacter()} ");
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.Write("|");
+                    }
+                    else
+                    {
+                        Console.Write($" {board.ocean[i, j].GetCharacter()} |");
+                    }
                 }
                 Console.WriteLine();
             }
@@ -187,6 +197,20 @@ namespace BattleshipOOP
                 if (board.ocean[i / 2, j].GetCharacter().ToString() == "H")
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write($" {board.ocean[i / 2, j].GetCharacter()} ");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.Write("|");
+                }
+                else if (board.ocean[i / 2, j].GetCharacter().ToString() == "X")
+                {
+                    Console.BackgroundColor = ConsoleColor.Red;
+                    Console.Write($" {board.ocean[i / 2, j].GetCharacter()} ");
+                    Console.BackgroundColor = ConsoleColor.Black;
+                    Console.Write("|");
+                }
+                else if (board.ocean[i / 2, j].GetCharacter().ToString() == "M")
+                {
+                    Console.ForegroundColor = ConsoleColor.White;
                     Console.Write($" {board.ocean[i / 2, j].GetCharacter()} ");
                     Console.ForegroundColor = ConsoleColor.Blue;
                     Console.Write("|");
