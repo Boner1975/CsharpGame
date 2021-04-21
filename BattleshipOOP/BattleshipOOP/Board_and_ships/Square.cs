@@ -8,11 +8,11 @@ namespace BattleshipOOP
 {
     public enum SquareStatus
     {
-        Empty = '~',
+        Empty = '≈',
         Ship = 'S',
-        Hit = 'H',
+        Hit = '♨',
         Missed = 'M',
-        Sunk = 'X'
+        Sunk = '☠'
 
         /*
         [Description("~")]
