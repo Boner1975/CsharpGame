@@ -46,7 +46,7 @@ namespace BattleshipOOP
             Console.WriteLine($"{tab}{leftMarginPlayer}{player.Name}");
             Console.WriteLine($"{tab}{leftMarginText}{text}");
             Console.WriteLine();
-            Console.Write("        ");
+            Console.Write($"{tab}");
             for (int i = 0; i < board.size; i++)
             {
                 if (i < 9)
@@ -118,6 +118,9 @@ namespace BattleshipOOP
                 if (i % 2 != 0)
                 {
                     Console.WriteLine();
+                    PrintSingleBoard(board2, i);
+                    /*
+                    Console.WriteLine();
                     Console.Write($"    {(char)(i / 2 + 65)}  |");
                     for (int j = 0; j < board1.size; j++)
                     {
@@ -140,6 +143,12 @@ namespace BattleshipOOP
                         }
                         
                     }
+
+                    */
+
+                    PrintSingleBoard(board1, i);
+
+                    /*
                     Console.Write($"    {(char)(i / 2 + 65)}  |");
                     for (int j = 0; j < board1.size; j++)
                     {
@@ -161,10 +170,36 @@ namespace BattleshipOOP
                             Console.Write($" {board1.ocean[i / 2, j].GetCharacter()} |");
                         }
                     }
+                    */
                 }
             }
             Console.WriteLine();
             Console.WriteLine();
+        }
+
+        public void PrintSingleBoard(Board board, int i)
+        {
+            Console.Write($"    {(char)(i / 2 + 65)}  |");
+            for (int j = 0; j < board.size; j++)
+            {
+                //Console.Write($" {board2.ocean[i / 2, j].GetCharacter()} |");
+
+                if (board.ocean[i / 2, j].GetCharacter().ToString() == "H")
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write($" {board.ocean[i / 2, j].GetCharacter()} ");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.Write("|");
+                }
+                else if (board.ocean[i / 2, j].GetCharacter().ToString() == "S")
+                {
+                    Console.Write(" ~ |");
+                }
+                else
+                {
+                    Console.Write($" {board.ocean[i / 2, j].GetCharacter()} |");
+                }
+            }
         }
 
         public void PrintMessageInLine(string message)
