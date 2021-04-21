@@ -30,7 +30,7 @@ namespace BattleshipOOP
                     {
                         Game game = new Game();
                         List<bool> PlayersMode = new List<bool>() {menu.IsPlayer1Human, menu.IsPlayer2Human};
-                        game.RunGame(PlayersMode, GameLevel);
+                        game.RunGame(PlayersMode, menu.GameLevel);
                     }
                     break;
                 case 1:
