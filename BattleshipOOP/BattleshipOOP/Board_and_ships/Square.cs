@@ -10,9 +10,9 @@ namespace BattleshipOOP
     {
         Empty = '≈',
         Ship = 'S',
-        Hit = '♨',
+        Hit = 'H',
         Missed = 'M',
-        Sunk = '☠'
+        Sunk = 'X'
 
         /*
         [Description("~")]

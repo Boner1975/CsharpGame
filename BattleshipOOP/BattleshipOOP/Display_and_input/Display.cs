@@ -94,7 +94,6 @@ namespace BattleshipOOP
         }
         public void DrawGameBoards(Board board1, Board board2, Player player1, Player player2, Utility utility)
         {
-            Console.OutputEncoding = System.Text.Encoding.Unicode;
             string MarginPlayer1 = utility.NickPosition(board1.size, player1.Name);
             string MarginPlayer2 = utility.NickPosition(board1.size, player2.Name);
             string boardBorder = new StringBuilder().Insert(0, "---+", board1.size).ToString();
@@ -139,17 +138,18 @@ namespace BattleshipOOP
 
         public void PrintSingleBoard(Board board, int i)
         {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
             Console.Write($"    {(char)(i / 2 + 65)}  |");
             for (int j = 0; j < board.size; j++)
             {
-                if (board.ocean[i / 2, j].GetCharacter().ToString() == "♨")
+                if (board.ocean[i / 2, j].GetCharacter().ToString() == "H")
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.Write($" {board.ocean[i / 2, j].GetCharacter()}");
+                    Console.Write($" {board.ocean[i / 2, j].GetCharacter()} ");
                     Console.ForegroundColor = ConsoleColor.Blue;
                     Console.Write("|");
                 }
-                else if (board.ocean[i / 2, j].GetCharacter().ToString() == "☠")
+                else if (board.ocean[i / 2, j].GetCharacter().ToString() == "X")
                 {
                     Console.BackgroundColor = ConsoleColor.Red;
                     Console.ForegroundColor = ConsoleColor.Black;
