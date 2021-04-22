@@ -70,8 +70,17 @@ public abstract class Menu
 
         foreach (string option in OptionsList[index])
         {
-            display.PrintMessage(ManageOptions(optionIndex, option, tabulation));
-            
+            string message = ManageOptions(optionIndex, option, tabulation);
+            if (message.Contains("–>"))
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+                display.PrintMessage(message);
+                Console.ForegroundColor = ConsoleColor.Blue;
+            }
+            else
+            {
+                display.PrintMessage(message);
+            }
             if (DropsDown(option) && index + 1 < OptionsList.Count)
                 PrintOptions(index + 1);
             
