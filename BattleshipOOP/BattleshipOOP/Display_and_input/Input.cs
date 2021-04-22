@@ -78,6 +78,11 @@ namespace BattleshipOOP
                         display.PrintMessage("Location out of range");
                         continue;
                     }
+                    else if (board.ocean[list[0], list[1]].GetCharacter().ToString() != "≈")
+                    {
+                        display.PrintMessage("You took a shot towards this direction before. Choose another location.");
+                        continue;
+                    }
                     isValidEntry = true;
                 }
                 else if (userInput.Length == 3 && int.TryParse((userInput[1].ToString() + userInput[2].ToString()), out _) && Char.IsLetter(userInput[0]))
@@ -86,6 +91,11 @@ namespace BattleshipOOP
                     if (list[0] > (int.Parse(board.size.ToString())) - 1 || list[1] > (int.Parse(board.size.ToString())) - 1)
                     {
                         display.PrintMessage("Location out of range");
+                        continue;
+                    }
+                    else if (board.ocean[list[0], list[1]].GetCharacter().ToString() != "≈")
+                    {
+                        display.PrintMessage("You took a shot towards this direction before. Choose another location.");
                         continue;
                     }
                     isValidEntry = true;
