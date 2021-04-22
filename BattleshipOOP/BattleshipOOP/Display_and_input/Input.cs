@@ -76,6 +76,7 @@ namespace BattleshipOOP
                     if (list[0] > (int.Parse(board.size.ToString())) - 1 || list[1] > (int.Parse(board.size.ToString())) - 1)
                     {
                         display.PrintMessage("Location out of range");
+                        list.Clear();
                         continue;
                     }
                     else if (board.ocean[list[0], list[1]].GetCharacter().ToString() != "≈")
@@ -91,6 +92,7 @@ namespace BattleshipOOP
                     if (list[0] > (int.Parse(board.size.ToString())) - 1 || list[1] > (int.Parse(board.size.ToString())) - 1)
                     {
                         display.PrintMessage("Location out of range");
+                        list.Clear();
                         continue;
                     }
                     else if (board.ocean[list[0], list[1]].GetCharacter().ToString() != "≈")
