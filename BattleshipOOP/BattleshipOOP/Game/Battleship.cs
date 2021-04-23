@@ -19,8 +19,7 @@ namespace BattleshipOOP
             {
                 finishGame = mainMenu.RunMenu();
                 mainMenu.ResetArrowIndex();
-                //Console.ReadKey();
-                
+
             } while (!finishGame);
         }
     }

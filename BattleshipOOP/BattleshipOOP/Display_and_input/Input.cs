@@ -79,7 +79,7 @@ namespace BattleshipOOP
                         list.Clear();
                         continue;
                     }
-                    else if (board.ocean[list[0], list[1]].GetCharacter().ToString() != "≈")
+                    else if (board.ocean[list[0], list[1]].GetCharacter().ToString() != "≈" && board.ocean[list[0], list[1]].GetCharacter().ToString() != "S")
                     {
                         display.PrintMessage("You took a shot towards this direction before. Choose another location.");
                         continue;
@@ -95,7 +95,7 @@ namespace BattleshipOOP
                         list.Clear();
                         continue;
                     }
-                    else if (board.ocean[list[0], list[1]].GetCharacter().ToString() != "≈")
+                    else if (board.ocean[list[0], list[1]].GetCharacter().ToString() != "≈" && board.ocean[list[0], list[1]].GetCharacter().ToString() != "S")
                     {
                         display.PrintMessage("You took a shot towards this direction before. Choose another location.");
                         continue;

@@ -34,6 +34,7 @@ namespace BattleshipOOP
 
             do
             {
+                Console.Clear();
                 CurrentPlayer = SwitchPlayers();
                 Opponent = SwitchPlayers();
                 Round();
@@ -65,23 +66,24 @@ namespace BattleshipOOP
 
         private void DefinePlayers()
         {
-            bool player1IsHuman = PlayersAreHumans[0];
-            bool player2IsHuman = PlayersAreHumans[1];
+            List<Player> players = new List<Player>();
+            List<Board> boards = new List<Board>();
+            
+            for (int i = 0; i < 2; i++)
+            {
+                players.Add(CreatePlayer(PlayersAreHumans[i], "Player1"));
+                boards.Add(DefineBoardsAndSetShips(BoardSize, players[i]));
+                Console.Clear();
+                display.DrawClearBoard(boards[i], players[i], utility);
+                display.PrintMessage("Press any key to precede to another player's board");
+                Console.ReadKey();
+                Console.Clear();
+            }
 
-            Player1 = CreatePlayer(player1IsHuman, "Player1");
-            Board2 = DefineBoardsAndSetShips(BoardSize, Player1);
-            Console.Clear();
-            display.DrawClearBoard(Board2, Player1, utility);
-            display.PrintMessage("Press any key to precede to another player's board");
-            Console.ReadKey();
-
-            Console.Clear();
-            Player2 = CreatePlayer(player2IsHuman, "Player2");
-            Board1 = DefineBoardsAndSetShips(BoardSize, Player2);
-            Console.Clear();
-            display.DrawClearBoard(Board1, Player2, utility);
-            display.PrintMessage("Press any key to precede start the game");
-            Console.ReadKey();
+            Player1 = players[0];
+            Player2 = players[1];
+            Board1 = boards[1];
+            Board2 = boards[0];
             
             CurrentPlayer = Player2;
         }

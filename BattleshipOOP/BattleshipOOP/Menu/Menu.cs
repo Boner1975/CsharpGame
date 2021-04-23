@@ -73,7 +73,7 @@ public abstract class Menu
             string message = ManageOptions(optionIndex, option, tabulation);
             if (message.Contains("–>"))
             {
-                Console.ForegroundColor = ConsoleColor.White;
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 display.PrintMessage(message);
                 Console.ForegroundColor = ConsoleColor.Blue;
             }
